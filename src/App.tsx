@@ -6,9 +6,10 @@ import {Validar} from "./pages/Validar"
 import {Consultar} from "./pages/Consultar"
 import {Navbar} from "./components/Navbar"
 import {FiseProvider} from "./context/FiseContext"
+import { useLocalStorage } from "./hooks/useLocalStorage";
 function App() {
-
-
+  const [value] = useLocalStorage('token',"")
+  console.log(value)
   return (
     <FiseProvider>
     <Navbar/>

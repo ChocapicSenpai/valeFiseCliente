@@ -33,7 +33,7 @@ export function Login() {
       const {token} = response.data
       setData({...data,token})
       setEstado({loading: false})
-      navigate(`/validar?token=${token}`)
+      navigate(`/validar`)
     }else if(response.status=== 401){
       setEstado({loading: false, error: 'No autorizado'})
     } else{
