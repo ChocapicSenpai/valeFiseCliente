@@ -6,7 +6,7 @@ type FiseProviderProps = {
 type Data = {
   telefono: string
   token: string
-  codigo?: number
+  codigo?: string
 }
 type FiseContext = {
   setData: (data: Data)=> void
@@ -20,7 +20,7 @@ export function useFise(){
 }
 
 export function FiseProvider({children}: FiseProviderProps){
-  const [data, setData] = useState<Data>({telefono:"", token:"", codigo:0})
+  const [data, setData] = useState<Data>({telefono:"", token:"", codigo:""})
   return (
     <FiseContext.Provider value={{setData, data}}>
       {children}

@@ -15,7 +15,7 @@ type Estado = {
 }
 
 export function Validar() {
-  const {data} = useFise()
+  const {data, setData} = useFise()
   const navigate = useNavigate();
   const [estado, setEstado]=useState<Estado>({loading:false, error:""})
  const urlBase = "http://ense26ln060:5090"
@@ -50,7 +50,7 @@ export function Validar() {
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
       <h1> Verificación de seguridad</h1>
         <Form.Label>Código de seguridad</Form.Label>
-        <Form.Control type="text"  />
+        <Form.Control type="text" value={data.codigo} onChange={(e: InputEvent)=>setData({...data,codigo:Number(e.target.value)})}  />
         <Link to="/">Volver a enviar el código</Link>
         <br/>
         <br/>
