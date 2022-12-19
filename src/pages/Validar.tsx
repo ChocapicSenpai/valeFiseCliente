@@ -17,7 +17,7 @@ type Estado = {
 export function Validar() {
   const {data, setData} = useFise()
   const navigate = useNavigate();
-  const [value, setValue] = useLocalStorage('token',"");
+  const [token, setToken] = useLocalStorage('token',"");
   const [estado, setEstado]=useState<Estado>({loading:false, error:""})
  const urlBase = "http://ense26ln060:5090"
 
@@ -37,7 +37,7 @@ export function Validar() {
         const {token} = response.data
         setData({...data,token})
         console.log('token', token)
-        setValue(token);
+        setToken(token);
         setEstado({loading: false})
         navigate(`/consultar`)
       }else if(response.status=== 401){

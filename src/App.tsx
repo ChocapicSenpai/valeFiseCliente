@@ -7,6 +7,7 @@ import {Consultar} from "./pages/Consultar"
 import {Navbar} from "./components/Navbar"
 import {FiseProvider} from "./context/FiseContext"
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import { ProtectedRoute } from "./router/ProtectedRoute";
 function App() {
   const [value] = useLocalStorage('token',"")
   console.log(value)
@@ -16,9 +17,10 @@ function App() {
     <Container>
 
     <Routes>
-          <Route path="/" element={<Login />} />
+
+        <Route path="/" element={<ProtectedRoute><Consultar /></ProtectedRoute>} />
           <Route path="/validar" element={<Validar />} />
-          <Route path="/consultar" element={<Consultar />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
     </Container>
     </FiseProvider>
