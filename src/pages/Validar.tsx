@@ -54,6 +54,11 @@ export function Validar() {
 
 
    }
+   if (estado.loading)
+  return <h1>Cargando</h1>
+if (estado.error)
+return <h1>{`Hubo un error: ${estado.error}`}</h1>
+ else
   return (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
 
