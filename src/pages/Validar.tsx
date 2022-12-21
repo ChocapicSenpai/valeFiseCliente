@@ -36,14 +36,14 @@ export function Validar() {
       if (response.status=== 200){
         const {token} = response.data
         setData({...data,token})
-        console.log('token', token)
+        console.log('token2', token)
         setToken(token);
         setEstado({loading: false})
-        navigate(`/consultar`)
+        navigate(`/agente`)
       }else if(response.status=== 401){
-        setEstado({loading: false, error: 'No autorizado'})
+        setEstado({loading: false})
       } else{
-        setEstado({loading: false, error: 'Error desconocido'})
+        setEstado({loading: false})
       }
 
     })
@@ -56,8 +56,7 @@ export function Validar() {
    }
    if (estado.loading)
   return <h1>Cargando</h1>
-if (estado.error)
-return <h1>{`Hubo un error: ${estado.error}`}</h1>
+
  else
   return (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
@@ -68,7 +67,8 @@ return <h1>{`Hubo un error: ${estado.error}`}</h1>
       <h1> Verificación de seguridad</h1>
         <Form.Label>Código de seguridad</Form.Label>
         <Form.Control type="text" value={data.codigo} onChange={(e: InputEvent)=>setData({...data,codigo:e.target.value})}  />
-        <Link to="/">Volver a enviar el código</Link>
+        <Link to="/login">Volver a enviar el código</Link>
+
         <br/>
         <br/>
         <Button variant="primary" type="button" className="w-100" onClick={() => validate()}>

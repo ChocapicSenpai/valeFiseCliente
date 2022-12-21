@@ -1,50 +1,33 @@
 import { useState } from "react"
 import { Button, Card, Form} from "react-bootstrap"
 import axios  from "axios"
-import {useFise} from "./../context/FiseContext"
+import { Grupo } from "../components/Grupo"
+import { ValesG} from "./../utils/Funciones"
+import {groupArrayByPeriod} from "./../utils/Funciones"
+
 const urlBase = "http://ense26ln060:5090"
 import config from "../../env.json"
 type Estado = {
   loading : boolean
   error?: string | undefined
 }
-type ValeProps = {
-  idVale: string
-  dni: string
-  nroVale: string
-  periodo: string
-  fcaducidad: string
-}
 
-function Vale({idVale, dni, nroVale, periodo, fcaducidad}:ValeProps){
-  return (
-<Card className="h-100">
-            <Card.Body className="d-flex flex-column">
-                <Card.Title className="d-flex justify-content-between align-items-baseline mb-4">
-                    <span className="fs-2">{idVale}</span>
 
-                </Card.Title>
-                <div className="mt-auto">
-                    {`Nro Vale: ${nroVale}`}
-                </div>
-            </Card.Body>
-        </Card>
-  )
-}
-export function Consultar(){
+export function ConsultarBnf(){
   const [dni, setDni] = useState("")
   const [estado, setEstado]=useState<Estado>({loading:false, error:""})
-  const [vales, setVales] = useState<ValeProps[]>([])
-  function consulta(dni: string){
-    const {data, setData} = useFise()
+  const [gVales, setGvales] = useState<ValesG[]>([])
 
-    axios.post(`${urlBase}/valesfise/obtener`, {
+  function consulta(){
+    setEstado({loading: true})
+    axios.post(`${urlBase}/valesfise/obtenerfree`, {
       idapp: config.ID_APP,
       dni: dni
-    },{ headers: {"Authorization" : `Bearer ${data.token}`} })
+    })
     .then(function (response) {
       if (response.status=== 200){
-        setVales(response.data.vales)
+        const g = groupArrayByPeriod(response.data.vales)
+        setGvales(g)
         setEstado({loading: false})
 
       }else if(response.status=== 401){
@@ -67,21 +50,21 @@ return <h1>{`Hubo un error: ${estado.error}`}</h1>
  else
     return (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
-<h1>Relacion de vales FISE</h1>
+<h1>Beneficiario FISE</h1>
 <Form >
 
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
       <h1> Consultar </h1>
         <Form.Label>DNI</Form.Label>
         <Form.Control type="text"  value={dni} onChange={(e)=>setDni(e.target.value)}/>
-        <Button variant="primary" type="button" className="w-100"
+        <Button variant="primary" type="button" className="w-100" onClick={()=>consulta()}
         >
         Consultar
       </Button>
       </Form.Group>
 
     </Form>
-{vales.map((vale)=><Vale {...vale}/>)}
+{gVales.map((g)=><Grupo key={g.periodo} periodo={g.periodo} items={g.items}/>)}
 
 
 

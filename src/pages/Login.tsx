@@ -31,9 +31,10 @@ export function Login() {
     console.log(response);
     if (response.status=== 200){
       const {token} = response.data
+      console.log('token1', token)
       setData({...data,token})
       setEstado({loading: false})
-      navigate(`/`)
+      navigate(`/validar`)
     }else if(response.status=== 401){
       setEstado({loading: false, error: 'No autorizado'})
     } else{
