@@ -25,6 +25,7 @@ export function ConsultarAgt(){
 
 
   function consulta(){
+    setGvales([])
     setEstado({loading: true})
     axios.post(`${urlBase}/valesfise/obtener`, {
       idapp: config.ID_APP,
@@ -36,23 +37,20 @@ export function ConsultarAgt(){
         setGvales(g)
         setEstado({loading: false})
 
-      }else if(response.status=== 401){
-        setEstado({loading: false, error: 'No autorizado'})
-      } else{
-        setEstado({loading: false, error: 'Error desconocido'})
       }
 
     })
     .catch(function (error) {
-      setEstado({loading:false, error:error})
-      console.log(error);
+      if(error.response.status=== 400){
+        setEstado({loading: false, error: 'DNI inválido'})
+      } else{
+        setEstado({loading: false, error: error.message})
+      }
     });
 
   }
   if (estado.loading)
   return <h1>Cargando</h1>
-if (estado.error)
-return <h1>{`Hubo un error: ${estado.error}`}</h1>
  else
     return (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
@@ -63,6 +61,7 @@ return <h1>{`Hubo un error: ${estado.error}`}</h1>
       <h1> Consultar </h1>
         <Form.Label>DNI</Form.Label>
         <Form.Control type="text"  value={dni} onChange={(e)=>setDni(e.target.value)}/>
+        {estado.error}
         <Button variant="primary" type="button" className="w-100" onClick={()=>consulta()}
         >
         Consultar

@@ -33,16 +33,16 @@ export function Login() {
       setData({...data,token})
       setEstado({loading: false})
       navigate(`/validar`)
-    }else if(response.status=== 401){
-      setEstado({loading: false, error: 'No autorizado'})
-    } else{
-      setEstado({loading: false, error: 'Error desconocido'})
     }
-
   })
   .catch(function (error) {
-    setEstado({loading:false, error:error})
-    console.log(error);
+    console.log(error)
+    if(error.response.status=== 401){
+      setEstado({loading: false, error: 'Acceso no autorizado'})
+    } else{
+      setEstado({loading: false, error: error.message})
+    }
+
   });
   setEstado({loading: false})
 
@@ -50,9 +50,7 @@ export function Login() {
 
  if (estado.loading)
   return <h1>Cargando</h1>
-if (estado.error)
-return <h1>{`Hubo un error: ${estado.error}`}</h1>
- else
+
   return (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
 
@@ -62,6 +60,7 @@ return <h1>{`Hubo un error: ${estado.error}`}</h1>
       <h1>Ingresa tu número de teléfono para validar tu acceso:</h1>
         <Form.Label>Telefono</Form.Label>
         <Form.Control type="text"  value={data.telefono} onChange={(e: InputEvent)=>setData({...data,telefono:e.target.value})}/>
+        {estado.error }
         <Button variant="primary" type="button" className="w-100" onClick={() => validar()}>
         Enviar
       </Button>
