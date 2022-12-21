@@ -7,6 +7,7 @@ type Data = {
   telefono: string
   token: string
   codigo?: string
+  agente?: string
 }
 type FiseContext = {
   setData: (data: Data)=> void

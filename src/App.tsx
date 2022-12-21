@@ -7,11 +7,8 @@ import {ConsultarAgt} from "./pages/ConsultarAgt"
 import {ConsultarBnf} from "./pages/ConsultarBnf"
 import {Navbar} from "./components/Navbar"
 import {FiseProvider} from "./context/FiseContext"
-import { useLocalStorage } from "./hooks/useLocalStorage";
 import { ProtectedRoute } from "./router/ProtectedRoute";
 function App() {
-  const [value] = useLocalStorage('token',"")
-  console.log('token final',value)
   return (
     <FiseProvider>
     <Navbar/>

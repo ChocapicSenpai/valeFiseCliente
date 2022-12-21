@@ -28,10 +28,8 @@ export function Login() {
   })
   .then(function (response) {
 
-    console.log(response);
     if (response.status=== 200){
       const {token} = response.data
-      console.log('token1', token)
       setData({...data,token})
       setEstado({loading: false})
       navigate(`/validar`)
@@ -61,7 +59,7 @@ return <h1>{`Hubo un error: ${estado.error}`}</h1>
       <Form >
 
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-      <h1> Beneficiario FISE</h1>
+      <h1>Ingresa tu número de teléfono para validar tu acceso:</h1>
         <Form.Label>Telefono</Form.Label>
         <Form.Control type="text"  value={data.telefono} onChange={(e: InputEvent)=>setData({...data,telefono:e.target.value})}/>
         <Button variant="primary" type="button" className="w-100" onClick={() => validar()}>

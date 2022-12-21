@@ -7,6 +7,7 @@ import {groupArrayByPeriod} from "../utils/Funciones"
 const urlBase = "http://ense26ln060:5090"
 import config from "../../env.json"
 import { useLocalStorage } from "../hooks/useLocalStorage"
+import { useFise } from "../context/FiseContext"
 type Estado = {
   loading : boolean
   error?: string | undefined
@@ -16,9 +17,12 @@ type Estado = {
 
 export function ConsultarAgt(){
   const [dni, setDni] = useState("")
+  const {data, setData} = useFise()
   const [estado, setEstado]=useState<Estado>({loading:false, error:""})
   const [gVales, setGvales] = useState<ValesG[]>([])
   const [token] = useLocalStorage('token',"")
+  const [agente] = useLocalStorage('agente',"")
+
 
   function consulta(){
     setEstado({loading: true})
@@ -52,7 +56,7 @@ return <h1>{`Hubo un error: ${estado.error}`}</h1>
  else
     return (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
-<h1>Agente FISE</h1>
+<h1>{`Bienvenido ${agente}` }</h1>
 <Form >
 
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

@@ -21,11 +21,8 @@ export function groupArrayByPeriod (arr:Vale[]): ValesG[]
   let anterior: string
   anterior = arr[0].periodo
   eGVale = { periodo: anterior, items:[]}
-  console.log('arr',arr)
   arr.forEach((vale, index)=>{
-    console.log('vale', vale)
     if (anterior === vale.periodo){
-      console.log('ingreso aqui')
       eGVale.items.push(vale)
     }else {
       gVales.push(eGVale)

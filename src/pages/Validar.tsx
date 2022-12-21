@@ -18,6 +18,7 @@ export function Validar() {
   const {data, setData} = useFise()
   const navigate = useNavigate();
   const [token, setToken] = useLocalStorage('token',"");
+  const [agente, setAgente] = useLocalStorage('agente',"");
   const [estado, setEstado]=useState<Estado>({loading:false, error:""})
  const urlBase = "http://ense26ln060:5090"
 
@@ -32,12 +33,11 @@ export function Validar() {
 
     },{ headers: {"Authorization" : `Bearer ${data.token}`} })
     .then(function (response) {
-      console.log(response);
       if (response.status=== 200){
-        const {token} = response.data
-        setData({...data,token})
-        console.log('token2', token)
+        const {token, agente} = response.data
+        setData({...data,token, agente: agente})
         setToken(token);
+        setAgente(agente);
         setEstado({loading: false})
         navigate(`/agente`)
       }else if(response.status=== 401){
@@ -64,7 +64,7 @@ export function Validar() {
       <Form >
 
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-      <h1> Verificación de seguridad</h1>
+      <h1> Ingresa el código de seguridad que te enviamos a tu teléfono via SMS</h1>
         <Form.Label>Código de seguridad</Form.Label>
         <Form.Control type="text" value={data.codigo} onChange={(e: InputEvent)=>setData({...data,codigo:e.target.value})}  />
         <Link to="/login">Volver a enviar el código</Link>
