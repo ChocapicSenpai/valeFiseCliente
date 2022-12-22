@@ -49,24 +49,26 @@ if (estado.error)
 return <h1>{`Hubo un error: ${estado.error}`}</h1>
  else
     return (
-    <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
-<h1>Beneficiario FISE</h1>
-<Form >
-
-      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-      <h1> Consultar </h1>
-        <Form.Label>DNI</Form.Label>
-        <Form.Control type="text"  value={dni} onChange={(e)=>setDni(e.target.value)}/>
-        <Button variant="primary" type="button" className="w-100" onClick={()=>consulta()}
-        >
-        Consultar
-      </Button>
-      </Form.Group>
+     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
+    {/* <div className="row justify-content-center align-items-center" > */}
+    <div className="col-md-4 col-sm-12 pe-0 ps-0" >
+    <h1>Beneficiario FISE</h1>
+    <Form >
+          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <h1> Consultar </h1>
+            <Form.Label>DNI</Form.Label>
+            <Form.Control type="text"  value={dni} onChange={(e)=>setDni(e.target.value)}/>
+            <Button variant="primary" type="button" className="w-100" onClick={()=>consulta()}
+            >
+            Consultar
+          </Button>
+          </Form.Group>
 
     </Form>
 {gVales.map((g)=><Grupo key={g.periodo} periodo={g.periodo} items={g.items}/>)}
 
 
 
+    </div> 
     </div>)
 }
