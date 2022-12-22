@@ -11,17 +11,20 @@ import { ProtectedRoute } from "./router/ProtectedRoute";
 function App() {
   return (
     <FiseProvider>
-    <Navbar/>
-    <Container>
-
-    <Routes>
-
-        <Route path="/" element={<ConsultarBnf/>} />
-        <Route path="/agente" element={<ProtectedRoute><ConsultarAgt/></ProtectedRoute>} />
-          <Route path="/validar" element={<Validar />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-    </Container>
+    <Navbar/>      
+    
+    <div className="container ps-2 pe-2">
+      <div className="row justify-content-center">
+        <div className="col-sm-12 col-md-4 border rounded-bottom fondo1 fullHeight">
+            <Routes>
+              <Route path="/" element={<ConsultarBnf/>} />
+              <Route path="/agente" element={<ProtectedRoute><ConsultarAgt/></ProtectedRoute>} />
+              <Route path="/validar" element={<Validar />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </div>
+        </div>
+    </div>
     </FiseProvider>
   )
 }

@@ -4,6 +4,7 @@ import axios  from "axios"
 import { Grupo } from "../components/Grupo"
 import { ValesG} from "./../utils/Funciones"
 import {groupArrayByPeriod} from "./../utils/Funciones"
+import "./styles.css"
 import Spinner from 'react-bootstrap/Spinner';
 const urlBase = "http://ense26ln060:5090"
 import config from "../../env.json"
@@ -51,25 +52,23 @@ export function ConsultarBnf(){
     </Spinner>)
  else
     return (
-    <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
-<h1>Beneficiario FISE</h1>
-<Form >
 
-      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-      <h1> Consultar </h1>
-        <Form.Label>DNI</Form.Label>
-        <Form.Control type="text"  value={dni} onChange={(e)=>setDni(e.target.value)}/>
-        {estado.error}
-        <Button variant="primary" type="button" className="w-100" onClick={()=>consulta()}
-        >
-        Consultar
-      </Button>
-      </Form.Group>
+<div className="p-4">
+    <h2 className="text-center">Beneficiario FISE</h2>
+    <Form >
+          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
 
-    </Form>
-{gVales.map((g)=><Grupo key={g.periodo} periodo={g.periodo} items={g.items}/>)}
+            <Form.Label className="mt-4">DNI</Form.Label>
+            <Form.Control type="text" value={dni} onChange={(e)=>setDni(e.target.value)}/>
+            <div className="text-danger">{estado.error}</div>
+            <Button variant="primary" type="button" className="w-100 mt-2" onClick={()=>consulta()}
+            >
+            Consultar
+          </Button>
+          </Form.Group>
 
+        </Form>
+    {gVales.map((g)=><Grupo key={g.periodo} periodo={g.periodo} items={g.items}/>)}
 
-
-    </div>)
+</div>          )
 }
