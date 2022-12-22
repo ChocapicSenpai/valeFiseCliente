@@ -55,21 +55,20 @@ return (
     <span className="visually-hidden">Loading...</span>
   </Spinner>)
   return (
-    <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
 
-      <Form >
+<div className="p-4">
+  <Form >
+    <Form.Group controlId="exampleForm.ControlInput1">
+        <h2>Ingresa tu número de teléfono para validar tu acceso:</h2>
+          <Form.Label className="mt-4">Telefono</Form.Label>
+          <Form.Control type="text"  value={data.telefono} onChange={(e: InputEvent)=>setData({...data,telefono:e.target.value})}/>
+          <div className="text-danger">{estado.error}</div>
+          <Button variant="primary" type="button" className="w-100 mt-2" onClick={() => validar()}>
+          Enviar
+        </Button>
+        </Form.Group>
+  </Form>    
+</div>
 
-      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-      <h1>Ingresa tu número de teléfono para validar tu acceso:</h1>
-        <Form.Label>Telefono</Form.Label>
-        <Form.Control type="text"  value={data.telefono} onChange={(e: InputEvent)=>setData({...data,telefono:e.target.value})}/>
-        {estado.error }
-        <Button variant="primary" type="button" className="w-100" onClick={() => validar()}>
-        Enviar
-      </Button>
-      </Form.Group>
-
-    </Form>
-    </div>
   )
 }
