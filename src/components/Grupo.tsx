@@ -8,7 +8,7 @@ export function Grupo({periodo, items}:ValesG) {
    <>
 
 <div className="card text-dark bg-light mb-3">
-  <div className="card-body ps-0 pe-0">
+  <div className="card-body ps-0 pe-0 pb-0">
     <div className="card-title">
     <h2 className="ps-2">{getStringPeriod(periodo)}</h2>
     </div>
