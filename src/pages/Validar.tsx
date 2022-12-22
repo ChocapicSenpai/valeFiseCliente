@@ -40,16 +40,17 @@ export function Validar() {
         setAgente(agente);
         setEstado({loading: false})
         navigate(`/agente`)
-      }else if(response.status=== 401){
-        setEstado({loading: false})
-      } else{
-        setEstado({loading: false})
       }
 
     })
     .catch(function (error) {
-      setEstado({loading:false, error:error})
-      console.log(error);
+      if(error.response.status=== 401){
+        setEstado({loading: false,error: 'Codigo incorrecto'})
+      } else{
+        setEstado({loading:false, error:error})
+      }
+
+
     });
 
 
@@ -67,6 +68,7 @@ export function Validar() {
       <h1> Ingresa el código de seguridad que te enviamos a tu teléfono via SMS</h1>
         <Form.Label>Código de seguridad</Form.Label>
         <Form.Control type="text" value={data.codigo} onChange={(e: InputEvent)=>setData({...data,codigo:e.target.value})}  />
+        {estado.error}
         <Link to="/login">Volver a enviar el código</Link>
 
         <br/>
