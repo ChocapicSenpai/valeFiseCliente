@@ -36,6 +36,7 @@ export function ConsultarBnf(){
     })
     .catch(function (error) {
       if(error.response.status=== 400){
+        // cambio
         setEstado({loading: false, error: 'DNI inválido'})
       } else{
         setEstado({loading: false, error: error.message})
