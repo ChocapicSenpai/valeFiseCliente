@@ -68,7 +68,7 @@ export function ConsultarBnf(){
           </Form.Group>
 
         </Form>
-    {gVales.map((g)=><Grupo key={g.periodo} periodo={g.periodo} items={g.items}/>)}
+    {gVales.map((g)=><Grupo key={g.periodo} periodo={String(g.periodo)} items={g.items}/>)}
 
 </div>          )
 }
