@@ -8,7 +8,10 @@ describe('Test for Funciones',()=>{
     expect(cad).toEqual("Ene-2022")
   })
 
-
+  test("Given 202202 then return Feb-2022", ()=>{
+    const cad= getStringPeriod("202202")
+    expect(cad).toEqual("Feb-2022")
+  })
 
 
 })
