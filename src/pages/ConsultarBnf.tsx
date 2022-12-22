@@ -4,7 +4,7 @@ import axios  from "axios"
 import { Grupo } from "../components/Grupo"
 import { ValesG} from "./../utils/Funciones"
 import {groupArrayByPeriod} from "./../utils/Funciones"
-
+import Spinner from 'react-bootstrap/Spinner';
 const urlBase = "http://ense26ln060:5090"
 import config from "../../env.json"
 type Estado = {
@@ -45,7 +45,10 @@ export function ConsultarBnf(){
 
   }
   if (estado.loading)
-  return <h1>Cargando</h1>
+  return (
+    <Spinner animation="border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>)
  else
     return (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
