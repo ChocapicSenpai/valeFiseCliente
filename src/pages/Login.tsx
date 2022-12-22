@@ -6,6 +6,7 @@ import config from "../../env.json"
 import { useState } from 'react';
 import axios  from "axios"
 import {useFise} from "./../context/FiseContext"
+import Spinner from 'react-bootstrap/Spinner';
 
 type InputEvent = React.ChangeEvent<HTMLInputElement>;
 type Estado = {
@@ -48,9 +49,11 @@ export function Login() {
 
 }
 
- if (estado.loading)
-  return <h1>Cargando</h1>
-
+if (estado.loading)
+return (
+  <Spinner animation="border" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </Spinner>)
   return (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
 

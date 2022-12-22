@@ -8,6 +8,8 @@ import axios  from "axios"
 import config from "../../env.json"
 import {useFise} from "./../context/FiseContext"
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import Spinner from 'react-bootstrap/Spinner';
+
 type InputEvent = React.ChangeEvent<HTMLInputElement>;
 type Estado = {
   loading : boolean
@@ -56,8 +58,10 @@ export function Validar() {
 
    }
    if (estado.loading)
-  return <h1>Cargando</h1>
-
+  return (
+    <Spinner animation="border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>)
  else
   return (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >

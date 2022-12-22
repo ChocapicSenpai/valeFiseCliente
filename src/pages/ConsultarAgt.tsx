@@ -8,6 +8,7 @@ const urlBase = "http://ense26ln060:5090"
 import config from "../../env.json"
 import { useLocalStorage } from "../hooks/useLocalStorage"
 import { useFise } from "../context/FiseContext"
+import Spinner from 'react-bootstrap/Spinner';
 type Estado = {
   loading : boolean
   error?: string | undefined
@@ -50,7 +51,11 @@ export function ConsultarAgt(){
 
   }
   if (estado.loading)
-  return <h1>Cargando</h1>
+  return (
+    <Spinner animation="border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>
+  );
  else
     return (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
