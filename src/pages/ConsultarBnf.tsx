@@ -57,7 +57,7 @@ export function ConsultarBnf(){
 
             <Form.Label className="mt-4">DNI</Form.Label>
             <Form.Control type="text"  value={dni} onChange={(e)=>setDni(e.target.value)}/>
-            {estado.error}
+            <div className="text-danger">{estado.error}</div>
             <Button variant="primary" type="button" className="w-100 mt-2" onClick={()=>consulta()}
             >
             Consultar

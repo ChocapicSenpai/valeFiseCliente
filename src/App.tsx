@@ -15,7 +15,7 @@ function App() {
     
     <div className="container ps-2 pe-2">
       <div className="row justify-content-center">
-        <div className="col-sm-12 col-md-4 border rounded-bottom fondo1 fullHeight ">
+        <div className="col-sm-12 col-md-4 border rounded-bottom fondo1 fullHeight">
             <Routes>
               <Route path="/" element={<ConsultarBnf/>} />
               <Route path="/agente" element={<ProtectedRoute><ConsultarAgt/></ProtectedRoute>} />

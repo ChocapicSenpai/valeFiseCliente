@@ -3,5 +3,5 @@
 }
 
 .fullHeight {
-    height: 94vh;
+    min-height: 92vh;
 }
