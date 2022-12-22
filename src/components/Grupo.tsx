@@ -5,10 +5,10 @@ export function Grupo({periodo, items}:ValesG) {
   return (
    <>
 
-<div className="card text-dark bg-light">
-  <div className="card-body">
+<div className="card text-dark bg-light mb-3">
+  <div className="card-body p-0">
     <div className="card-title">
-    <h1>{periodo}</h1>
+    <h2 className="ps-2">{periodo}</h2>
     </div>
     {items.map((vale)=><ValeC key={vale.idVale} {...vale}/>)}
   </div>
