@@ -14,8 +14,6 @@ type Estado = {
   error?: string | undefined
 }
 
-
-
 export function ConsultarAgt(){
   const [dni, setDni] = useState("")
   const {data, setData} = useFise()
@@ -23,7 +21,6 @@ export function ConsultarAgt(){
   const [gVales, setGvales] = useState<ValesG[]>([])
   const [token] = useLocalStorage('token',"")
   const [agente] = useLocalStorage('agente',"")
-
 
   function consulta(){
     setGvales([])
@@ -58,25 +55,21 @@ export function ConsultarAgt(){
   );
  else
     return (
-    <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
-<h1>{`Bienvenido ${agente}` }</h1>
-<Form >
 
-      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-      <h1> Consultar </h1>
-        <Form.Label>DNI</Form.Label>
-        <Form.Control type="text"  value={dni} onChange={(e)=>setDni(e.target.value)}/>
-        {estado.error}
-        <Button variant="primary" type="button" className="w-100" onClick={()=>consulta()}
-        >
-        Consultar
-      </Button>
-      </Form.Group>
-
-    </Form>
-{gVales.map((g)=><Grupo key={g.periodo} periodo={g.periodo} items={g.items}/>)}
-
-
-
+    <div className="p-4">
+      <h2>{`Bienvenido ${agente}` }</h2>
+      <Form >
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label className="mt-4">DNI</Form.Label>
+              <Form.Control type="text"  value={dni} onChange={(e)=>setDni(e.target.value)}/>
+              <div className="text-danger">{estado.error}</div>
+              <Button variant="primary" type="button" className="w-100 mt-2" onClick={()=>consulta()}
+              >
+              Consultar
+            </Button>
+            </Form.Group>
+          </Form>
+      {gVales.map((g)=><Grupo key={g.periodo} periodo={g.periodo} items={g.items}/>)}
     </div>)
+
 }
