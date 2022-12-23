@@ -23,6 +23,14 @@ export function Login() {
 
  const validar = ()=>{
   setEstado({loading:true})
+  if (!data.telefono || data.telefono === ""){
+    setEstado({loading: false, error:"Ingrese Teléfono"})
+    return
+  }
+  if (data.telefono.length < 9){
+    setEstado({loading: false, error:"Teléfono debe ser 9 dígitos"})
+    return
+  }
   axios.post(`${urlBase}/autenticacion/login`, {
     idapp: config.ID_APP,
     telefono: data.telefono
@@ -49,11 +57,7 @@ export function Login() {
 
 }
 
-if (estado.loading)
-return (
-  <Spinner animation="border" role="status" variant="primary">
-    <span className="visually-hidden">Loading...</span>
-  </Spinner>)
+
   return (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
 
@@ -67,6 +71,9 @@ return (
         <Button variant="primary" type="button" className="w-100" onClick={() => validar()}>
         Enviar
       </Button>
+      {estado.loading&&<Spinner animation="border" role="status" variant="primary">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>}
       </Form.Group>
 
     </Form>

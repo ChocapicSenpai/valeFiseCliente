@@ -55,9 +55,12 @@ export function ConsultarBnf(){
   }
   if (estado.loading)
   return (
-    <Spinner animation="border" role="status" variant="primary">
+    <div className="d-flex justify-content-center">
+<Spinner animation="border" role="status" variant="primary">
       <span className="visually-hidden">Loading...</span>
-    </Spinner>)
+    </Spinner>
+
+    </div>)
  else
     return (
 
@@ -76,6 +79,7 @@ export function ConsultarBnf(){
           </Form.Group>
 
         </Form>
+
     {gVales.map((g)=><Grupo key={g.periodo} periodo={String(g.periodo)} items={g.items}/>)}
 
 </div>          )
