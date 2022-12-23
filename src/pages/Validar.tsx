@@ -64,25 +64,21 @@ export function Validar() {
     </Spinner>)
  else
   return (
-    <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
 
+    <div className="p-4">
       <Form >
-
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-      <h1> Ingresa el código de seguridad que te enviamos a tu teléfono via SMS</h1>
-        <Form.Label>Código de seguridad</Form.Label>
+      <h2> Ingresa el código de seguridad que te enviamos a tu teléfono via SMS</h2>
+        <Form.Label className="mt-4">Código de seguridad</Form.Label>
         <Form.Control type="text" value={data.codigo} onChange={(e: InputEvent)=>setData({...data,codigo:e.target.value})}  />
-        {estado.error}
+        <div className="text-danger">{estado.error}</div>
         <Link to="/login">Volver a enviar el código</Link>
-
-        <br/>
-        <br/>
-        <Button variant="primary" type="button" className="w-100" onClick={() => validate()}>
+        <Button variant="primary" type="button" className="w-100 mt-4" onClick={() => validate()}>
         Verificar
       </Button>
       </Form.Group>
-
     </Form>
     </div>
+
   )
 }
