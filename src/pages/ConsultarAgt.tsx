@@ -57,7 +57,8 @@ export function ConsultarAgt(){
     return (
 
     <div className="p-4">
-      <h2>{`Bienvenido ${agente}` }</h2>
+      <h2>Bienvenido Agente</h2>
+      <h2>{`${agente}` }</h2>
       <Form >
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label className="mt-4">DNI</Form.Label>
