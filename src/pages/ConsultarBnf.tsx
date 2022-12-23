@@ -20,6 +20,14 @@ export function ConsultarBnf(){
   const [gVales, setGvales] = useState<ValesG[]>([])
 
   function consulta(){
+    if (!dni || dni === ""){
+      setEstado({loading: false, error:"Ingrese DNI"})
+      return
+    }
+    if (dni.length !== 8){
+      setEstado({loading: false, error:"DNI debe ser 8 dígitos"})
+      return
+    }
     setEstado({loading: true})
     setGvales([])
     axios.post(`${urlBase}/valesfise/obtenerfree`, {
@@ -47,7 +55,7 @@ export function ConsultarBnf(){
   }
   if (estado.loading)
   return (
-    <Spinner animation="border" role="status">
+    <Spinner animation="border" role="status" variant="primary">
       <span className="visually-hidden">Loading...</span>
     </Spinner>)
  else
@@ -59,7 +67,7 @@ export function ConsultarBnf(){
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
 
             <Form.Label className="mt-4">DNI</Form.Label>
-            <Form.Control type="text" value={dni} onChange={(e)=>setDni(e.target.value)}/>
+            <Form.Control type="text" value={dni} onChange={(e)=>setDni(e.target.value)} maxLength={8}/>
             <div className="text-danger">{estado.error}</div>
             <Button variant="primary" type="button" className="w-100 mt-2" onClick={()=>consulta()}
             >

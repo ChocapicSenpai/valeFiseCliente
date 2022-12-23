@@ -27,6 +27,14 @@ export function ConsultarAgt(){
 
   function consulta(){
     setGvales([])
+    if (!dni || dni === ""){
+      setEstado({loading: false, error:"Ingrese DNI"})
+      return
+    }
+    if (dni.length !== 8){
+      setEstado({loading: false, error:"DNI debe ser 8 dígitos"})
+      return
+    }
     setEstado({loading: true})
     axios.post(`${urlBase}/valesfise/obtener`, {
       idapp: config.ID_APP,
@@ -52,7 +60,7 @@ export function ConsultarAgt(){
   }
   if (estado.loading)
   return (
-    <Spinner animation="border" role="status">
+    <Spinner animation="border" role="status" variant="primary">
       <span className="visually-hidden">Loading...</span>
     </Spinner>
   );
@@ -63,9 +71,8 @@ export function ConsultarAgt(){
 <Form >
 
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-      <h1> Consultar </h1>
         <Form.Label>DNI</Form.Label>
-        <Form.Control type="text"  value={dni} onChange={(e)=>setDni(e.target.value)}/>
+        <Form.Control type="text"  value={dni} onChange={(e)=>setDni(e.target.value)} maxLength={8}/>
         {estado.error}
         <Button variant="primary" type="button" className="w-100" onClick={()=>consulta()}
         >
@@ -74,7 +81,7 @@ export function ConsultarAgt(){
       </Form.Group>
 
     </Form>
-{gVales.map((g)=><Grupo key={g.periodo} periodo={g.periodo} items={g.items}/>)}
+{gVales.map((g)=><Grupo key={g.periodo} periodo={String(g.periodo)} items={g.items}/>)}
 
 
 
