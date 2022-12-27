@@ -25,7 +25,14 @@ export function Validar() {
  const urlBase = "http://ense26ln060:5090"
 
   const validate = ()=>{
-
+    if (!data.codigo || data.codigo === ""){
+      setEstado({loading: false, error:"Ingrese Código"})
+      return
+    }
+    if (data.codigo.length !== 4){
+      setEstado({loading: false, error:"Código inválido"})
+      return
+    }
     setEstado({loading:true})
 
     axios.post(`${urlBase}/autenticacion/validate`, {
@@ -58,24 +65,28 @@ export function Validar() {
 
    }
    if (estado.loading)
-  return (
-    <Spinner animation="border" role="status" variant="primary">
-      <span className="visually-hidden">Loading...</span>
-    </Spinner>)
- else
+   return (
+     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+ <Spinner animation="border" role="status" variant="primary">
+       <span className="visually-hidden">Loading...</span>
+     </Spinner>
+
+     </div>
+     )
   return (
 
     <div className="p-4">
       <Form >
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-      <h2> Ingresa el código de seguridad que te enviamos a tu teléfono via SMS</h2>
-        <Form.Label className="mt-4">Código de seguridad</Form.Label>
+      <h1> Ingresa el código de seguridad que te enviamos a tu teléfono via SMS</h1>
+        <Form.Label>Código de seguridad</Form.Label>
         <Form.Control type="text" value={data.codigo} onChange={(e: InputEvent)=>setData({...data,codigo:e.target.value})}  />
-        <div className="text-danger">{estado.error}</div>
+        {estado.error}
         <Link to="/login">Volver a enviar el código</Link>
         <Button variant="primary" type="button" className="w-100 mt-4" onClick={() => validate()}>
         Verificar
       </Button>
+
       </Form.Group>
     </Form>
     </div>

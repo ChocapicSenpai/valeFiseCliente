@@ -23,6 +23,14 @@ export function Login() {
 
  const validar = ()=>{
   setEstado({loading:true})
+  if (!data.telefono || data.telefono === ""){
+    setEstado({loading: false, error:"Ingrese Teléfono"})
+    return
+  }
+  if (data.telefono.length < 9){
+    setEstado({loading: false, error:"Teléfono debe ser 9 dígitos"})
+    return
+  }
   axios.post(`${urlBase}/autenticacion/login`, {
     idapp: config.ID_APP,
     telefono: data.telefono
@@ -48,12 +56,16 @@ export function Login() {
   setEstado({loading: false})
 
 }
-
 if (estado.loading)
-return (
-  <Spinner animation="border" role="status" variant="primary">
-    <span className="visually-hidden">Loading...</span>
-  </Spinner>)
+  return (
+    <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+<Spinner animation="border" role="status" variant="primary">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>
+
+    </div>
+    )
+
   return (
 
 <div className="p-4">
@@ -70,5 +82,21 @@ return (
   </Form>    
 </div>
 
+<<<<<<< HEAD
+=======
+      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+      <h1>Ingresa tu número de teléfono para validar tu acceso:</h1>
+        <Form.Label>Telefono</Form.Label>
+        <Form.Control type="text"  value={data.telefono} onChange={(e: InputEvent)=>setData({...data,telefono:e.target.value})}/>
+        <div className="text-danger"> {estado.error}</div>
+        <Button variant="primary" type="button" className="w-100" onClick={() => validar()}>
+        Enviar
+      </Button>
+
+      </Form.Group>
+
+    </Form>
+    </div>
+>>>>>>> origin/main
   )
 }
