@@ -56,7 +56,15 @@ export function Login() {
   setEstado({loading: false})
 
 }
+if (estado.loading)
+  return (
+    <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+<Spinner animation="border" role="status" variant="primary">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>
 
+    </div>
+    )
 
   return (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
@@ -71,9 +79,7 @@ export function Login() {
         <Button variant="primary" type="button" className="w-100" onClick={() => validar()}>
         Enviar
       </Button>
-      {estado.loading&&<Spinner animation="border" role="status" variant="primary">
-      <span className="visually-hidden">Loading...</span>
-    </Spinner>}
+
       </Form.Group>
 
     </Form>

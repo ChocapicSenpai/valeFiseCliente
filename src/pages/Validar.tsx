@@ -64,7 +64,15 @@ export function Validar() {
 
 
    }
+   if (estado.loading)
+   return (
+     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+ <Spinner animation="border" role="status" variant="primary">
+       <span className="visually-hidden">Loading...</span>
+     </Spinner>
 
+     </div>
+     )
   return (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
 
@@ -83,9 +91,7 @@ export function Validar() {
         <Button variant="primary" type="button" className="w-100" onClick={() => validate()}>
         Verificar
       </Button>
-      {estado.loading&&<Spinner animation="border" role="status" variant="primary">
-      <span className="visually-hidden">Loading...</span>
-    </Spinner>}
+
       </Form.Group>
 
     </Form>

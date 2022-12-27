@@ -55,12 +55,13 @@ export function ConsultarBnf(){
   }
   if (estado.loading)
   return (
-    <div className="d-flex justify-content-center">
+    <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
 <Spinner animation="border" role="status" variant="primary">
       <span className="visually-hidden">Loading...</span>
     </Spinner>
 
-    </div>)
+    </div>
+    )
  else
     return (
 

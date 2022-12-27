@@ -58,7 +58,15 @@ export function ConsultarAgt(){
     });
 
   }
+  if (estado.loading)
+  return (
+    <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+<Spinner animation="border" role="status" variant="primary">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>
 
+    </div>
+    )
     return (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
 <h1>{`Bienvenido ${agente}` }</h1>
@@ -75,9 +83,7 @@ export function ConsultarAgt(){
       </Form.Group>
 
     </Form>
-    {estado.loading&&<Spinner animation="border" role="status" variant="primary">
-      <span className="visually-hidden">Loading...</span>
-    </Spinner>}
+
 {gVales.map((g)=><Grupo key={g.periodo} periodo={String(g.periodo)} items={g.items}/>)}
 
 
