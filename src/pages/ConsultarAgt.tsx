@@ -4,8 +4,8 @@ import axios  from "axios"
 import { Grupo } from "../components/Grupo"
 import { ValesG} from "../utils/Funciones"
 import {groupArrayByPeriod} from "../utils/Funciones"
-const urlBase = "http://ense26ln060:5090"
-import config from "../../env.json"
+import {config} from "./../config/"
+
 import { useLocalStorage } from "../hooks/useLocalStorage"
 import { useFise } from "../context/FiseContext"
 import Spinner from 'react-bootstrap/Spinner';
@@ -13,8 +13,6 @@ type Estado = {
   loading : boolean
   error?: string | undefined
 }
-
-
 
 export function ConsultarAgt(){
   const [dni, setDni] = useState("")
@@ -24,20 +22,11 @@ export function ConsultarAgt(){
   const [token] = useLocalStorage('token',"")
   const [agente] = useLocalStorage('agente',"")
 
-
   function consulta(){
     setGvales([])
-    if (!dni || dni === ""){
-      setEstado({loading: false, error:"Ingrese DNI"})
-      return
-    }
-    if (dni.length !== 8){
-      setEstado({loading: false, error:"DNI debe ser 8 dígitos"})
-      return
-    }
     setEstado({loading: true})
-    axios.post(`${urlBase}/valesfise/obtener`, {
-      idapp: config.ID_APP,
+    axios.post(`${config.urlBase}/valesfise/obtener`, {
+      idapp: config.idApp,
       dni: dni
     },{ headers: {"Authorization" : `Bearer ${token}`} })
     .then(function (response) {
@@ -50,7 +39,8 @@ export function ConsultarAgt(){
 
     })
     .catch(function (error) {
-      if(error.response.status=== 400){
+      console.log(error)
+      if(error.response?.status=== 400){
         setEstado({loading: false, error: 'DNI inválido'})
       } else{
         setEstado({loading: false, error: error.message})
@@ -68,25 +58,22 @@ export function ConsultarAgt(){
     </div>
     )
     return (
-    <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
-<h1>{`Bienvenido ${agente}` }</h1>
-<Form >
 
-      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-        <Form.Label>DNI</Form.Label>
-        <Form.Control type="text"  value={dni} onChange={(e)=>setDni(e.target.value)} maxLength={8}/>
-        <div className="text-danger"> {estado.error}</div>
-        <Button variant="primary" type="button" className="w-100" onClick={()=>consulta()}
-        >
-        Consultar
-      </Button>
-      </Form.Group>
-
-    </Form>
-
-{gVales.map((g)=><Grupo key={g.periodo} periodo={String(g.periodo)} items={g.items}/>)}
-
-
-
+    <div className="p-4">
+      <h2>Bienvenido Agente</h2>
+      <h2>{`${agente}` }</h2>
+      <Form >
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label className="mt-4">DNI</Form.Label>
+              <Form.Control type="text"  value={dni} onChange={(e)=>setDni(e.target.value)}/>
+              <div className="text-danger">{estado.error}</div>
+              <Button variant="primary" type="button" className="w-100 mt-2" onClick={()=>consulta()}
+              >
+              Consultar
+            </Button>
+            </Form.Group>
+          </Form>
+          {gVales.map((g)=><Grupo key={g.periodo} periodo={String(g.periodo)} items={g.items}/>)}
     </div>)
+
 }

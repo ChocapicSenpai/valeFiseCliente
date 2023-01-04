@@ -2,12 +2,12 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
-import config from "../../env.json"
+
 import { useState } from 'react';
 import axios  from "axios"
 import {useFise} from "./../context/FiseContext"
 import Spinner from 'react-bootstrap/Spinner';
-
+import {config} from "./../config/"
 type InputEvent = React.ChangeEvent<HTMLInputElement>;
 type Estado = {
   loading : boolean
@@ -18,7 +18,7 @@ export function Login() {
   const navigate = useNavigate();
 
   const [estado, setEstado]=useState<Estado>({loading:false, error:""})
- const urlBase = "http://ense26ln060:5090"
+
 
 
  const validar = ()=>{
@@ -31,8 +31,8 @@ export function Login() {
     setEstado({loading: false, error:"Teléfono debe ser 9 dígitos"})
     return
   }
-  axios.post(`${urlBase}/autenticacion/login`, {
-    idapp: config.ID_APP,
+  axios.post(`${config.urlBase}/autenticacion/login`, {
+    idapp: config.idApp,
     telefono: data.telefono
   })
   .then(function (response) {
@@ -67,22 +67,20 @@ if (estado.loading)
     )
 
   return (
-    <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center" >
 
-      <Form >
+<div className="p-4">
+  <Form >
+    <Form.Group controlId="exampleForm.ControlInput1">
+        <h2>Ingresa tu número de teléfono para validar tu acceso:</h2>
+          <Form.Label className="mt-4">Telefono</Form.Label>
+          <Form.Control type="text"  value={data.telefono} onChange={(e: InputEvent)=>setData({...data,telefono:e.target.value})}/>
+          <div className="text-danger">{estado.error}</div>
+          <Button variant="primary" type="button" className="w-100 mt-2" onClick={() => validar()}>
+          Enviar
+        </Button>
+        </Form.Group>
+  </Form>
+</div>
 
-      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-      <h1>Ingresa tu número de teléfono para validar tu acceso:</h1>
-        <Form.Label>Telefono</Form.Label>
-        <Form.Control type="text"  value={data.telefono} onChange={(e: InputEvent)=>setData({...data,telefono:e.target.value})}/>
-        <div className="text-danger"> {estado.error}</div>
-        <Button variant="primary" type="button" className="w-100" onClick={() => validar()}>
-        Enviar
-      </Button>
-
-      </Form.Group>
-
-    </Form>
-    </div>
   )
 }
