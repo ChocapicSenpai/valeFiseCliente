@@ -6,8 +6,8 @@ import { ValesG} from "./../utils/Funciones"
 import {groupArrayByPeriod} from "./../utils/Funciones"
 import "./styles.css"
 import Spinner from 'react-bootstrap/Spinner';
-const urlBase = "http://ense26ln060:5090"
-import config from "../../env.json"
+
+import {config} from "./../config/"
 type Estado = {
   loading : boolean
   error?: string | undefined
@@ -30,8 +30,8 @@ export function ConsultarBnf(){
     }
     setEstado({loading: true})
     setGvales([])
-    axios.post(`${urlBase}/valesfise/obtenerfree`, {
-      idapp: config.ID_APP,
+    axios.post(`${config.urlBase}/valesfise/obtenerfree`, {
+      idapp: config.idApp,
       dni: dni
     })
     .then(function (response) {
@@ -55,9 +55,13 @@ export function ConsultarBnf(){
   }
   if (estado.loading)
   return (
-    <Spinner animation="border" role="status" variant="primary">
+    <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+<Spinner animation="border" role="status" variant="primary">
       <span className="visually-hidden">Loading...</span>
-    </Spinner>)
+    </Spinner>
+
+    </div>
+    )
  else
     return (
 
@@ -76,6 +80,7 @@ export function ConsultarBnf(){
           </Form.Group>
 
         </Form>
+
     {gVales.map((g)=><Grupo key={g.periodo} periodo={String(g.periodo)} items={g.items}/>)}
 
 </div>          )

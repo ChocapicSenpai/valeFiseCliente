@@ -2,12 +2,12 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
-import config from "../../env.json"
+
 import { useState } from 'react';
 import axios  from "axios"
 import {useFise} from "./../context/FiseContext"
 import Spinner from 'react-bootstrap/Spinner';
-
+import {config} from "./../config/"
 type InputEvent = React.ChangeEvent<HTMLInputElement>;
 type Estado = {
   loading : boolean
@@ -18,13 +18,21 @@ export function Login() {
   const navigate = useNavigate();
 
   const [estado, setEstado]=useState<Estado>({loading:false, error:""})
- const urlBase = "http://ense26ln060:5090"
+
 
 
  const validar = ()=>{
   setEstado({loading:true})
-  axios.post(`${urlBase}/autenticacion/login`, {
-    idapp: config.ID_APP,
+  if (!data.telefono || data.telefono === ""){
+    setEstado({loading: false, error:"Ingrese Teléfono"})
+    return
+  }
+  if (data.telefono.length < 9){
+    setEstado({loading: false, error:"Teléfono debe ser 9 dígitos"})
+    return
+  }
+  axios.post(`${config.urlBase}/autenticacion/login`, {
+    idapp: config.idApp,
     telefono: data.telefono
   })
   .then(function (response) {
@@ -48,12 +56,16 @@ export function Login() {
   setEstado({loading: false})
 
 }
-
 if (estado.loading)
-return (
-  <Spinner animation="border" role="status" variant="primary">
-    <span className="visually-hidden">Loading...</span>
-  </Spinner>)
+  return (
+    <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+<Spinner animation="border" role="status" variant="primary">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>
+
+    </div>
+    )
+
   return (
 
 <div className="p-4">
@@ -67,7 +79,7 @@ return (
           Enviar
         </Button>
         </Form.Group>
-  </Form>    
+  </Form>
 </div>
 
   )

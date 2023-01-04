@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios  from "axios"
-import config from "../../env.json"
+import {config} from "./../config/"
 import {useFise} from "./../context/FiseContext"
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import Spinner from 'react-bootstrap/Spinner';
@@ -22,14 +22,21 @@ export function Validar() {
   const [token, setToken] = useLocalStorage('token',"");
   const [agente, setAgente] = useLocalStorage('agente',"");
   const [estado, setEstado]=useState<Estado>({loading:false, error:""})
- const urlBase = "http://ense26ln060:5090"
+
 
   const validate = ()=>{
-
+    if (!data.codigo || data.codigo === ""){
+      setEstado({loading: false, error:"Ingrese Código"})
+      return
+    }
+    if (data.codigo.length !== 4){
+      setEstado({loading: false, error:"Código inválido"})
+      return
+    }
     setEstado({loading:true})
 
-    axios.post(`${urlBase}/autenticacion/validate`, {
-      idapp: config.ID_APP,
+    axios.post(`${config.urlBase}/autenticacion/validate`, {
+      idapp: config.idApp,
       telefono: data.telefono,
       codigo: data.codigo
 
@@ -58,11 +65,14 @@ export function Validar() {
 
    }
    if (estado.loading)
-  return (
-    <Spinner animation="border" role="status" variant="primary">
-      <span className="visually-hidden">Loading...</span>
-    </Spinner>)
- else
+   return (
+     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+ <Spinner animation="border" role="status" variant="primary">
+       <span className="visually-hidden">Loading...</span>
+     </Spinner>
+
+     </div>
+     )
   return (
 
     <div className="p-4">
@@ -76,6 +86,7 @@ export function Validar() {
         <Button variant="primary" type="button" className="w-100 mt-4" onClick={() => validate()}>
         Verificar
       </Button>
+
       </Form.Group>
     </Form>
     </div>
