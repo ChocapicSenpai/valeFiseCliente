@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios  from "axios"
-import config from "../../env.json"
+import {config} from "./../config/"
 import {useFise} from "./../context/FiseContext"
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import Spinner from 'react-bootstrap/Spinner';
@@ -22,7 +22,7 @@ export function Validar() {
   const [token, setToken] = useLocalStorage('token',"");
   const [agente, setAgente] = useLocalStorage('agente',"");
   const [estado, setEstado]=useState<Estado>({loading:false, error:""})
- const urlBase = "http://ense26ln060:5090"
+
 
   const validate = ()=>{
     if (!data.codigo || data.codigo === ""){
@@ -35,8 +35,8 @@ export function Validar() {
     }
     setEstado({loading:true})
 
-    axios.post(`${urlBase}/autenticacion/validate`, {
-      idapp: config.ID_APP,
+    axios.post(`${config.urlBase}/autenticacion/validate`, {
+      idapp: config.idApp,
       telefono: data.telefono,
       codigo: data.codigo
 

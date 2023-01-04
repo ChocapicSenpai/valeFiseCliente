@@ -4,8 +4,8 @@ import axios  from "axios"
 import { Grupo } from "../components/Grupo"
 import { ValesG} from "../utils/Funciones"
 import {groupArrayByPeriod} from "../utils/Funciones"
-const urlBase = "http://ense26ln060:5090"
-import config from "../../env.json"
+import {config} from "./../config/"
+
 import { useLocalStorage } from "../hooks/useLocalStorage"
 import { useFise } from "../context/FiseContext"
 import Spinner from 'react-bootstrap/Spinner';
@@ -36,8 +36,8 @@ export function ConsultarAgt(){
       return
     }
     setEstado({loading: true})
-    axios.post(`${urlBase}/valesfise/obtener`, {
-      idapp: config.ID_APP,
+    axios.post(`${config.urlBase}/valesfise/obtener`, {
+      idapp: config.idApp,
       dni: dni
     },{ headers: {"Authorization" : `Bearer ${token}`} })
     .then(function (response) {
@@ -50,7 +50,8 @@ export function ConsultarAgt(){
 
     })
     .catch(function (error) {
-      if(error.response.status=== 400){
+      console.log(error)
+      if(error.response?.status=== 400){
         setEstado({loading: false, error: 'DNI inválido'})
       } else{
         setEstado({loading: false, error: error.message})
