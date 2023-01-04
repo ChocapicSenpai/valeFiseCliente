@@ -34,7 +34,7 @@ export function Login() {
   axios.post(`${config.urlBase}/autenticacion/login`, {
     idapp: config.idApp,
     telefono: data.telefono
-  })
+  },{timeout:config.timeOut})
   .then(function (response) {
 
     if (response.status=== 200){
@@ -45,8 +45,7 @@ export function Login() {
     }
   })
   .catch(function (error) {
-    console.log(error)
-    if(error.response.status=== 401){
+    if(error.response?.status=== 401){
       setEstado({loading: false, error: 'Acceso no autorizado'})
     } else{
       setEstado({loading: false, error: error.message})

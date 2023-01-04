@@ -33,7 +33,7 @@ export function ConsultarBnf(){
     axios.post(`${config.urlBase}/valesfise/obtenerfree`, {
       idapp: config.idApp,
       dni: dni
-    })
+    },{timeout:config.timeOut})
     .then(function (response) {
       if (response.status=== 200){
         const g = groupArrayByPeriod(response.data.vales)
@@ -44,10 +44,11 @@ export function ConsultarBnf(){
 
     })
     .catch(function (error) {
-      if(error.response.status=== 400){
-        // cambio
-        setEstado({loading: false, error: 'DNI inválido'})
-      } else{
+
+      if(error.response?.status=== 400){
+
+        setEstado({loading: false, error: error.response.data.message})
+      }else{
         setEstado({loading: false, error: error.message})
       }
     });

@@ -28,7 +28,7 @@ export function ConsultarAgt(){
     axios.post(`${config.urlBase}/valesfise/obtener`, {
       idapp: config.idApp,
       dni: dni
-    },{ headers: {"Authorization" : `Bearer ${token}`} })
+    },{ headers: {"Authorization" : `Bearer ${token}`},timeout: config.timeOut })
     .then(function (response) {
       if (response.status=== 200){
         const g = groupArrayByPeriod(response.data.vales)
@@ -39,9 +39,9 @@ export function ConsultarAgt(){
 
     })
     .catch(function (error) {
-      console.log(error)
+
       if(error.response?.status=== 400){
-        setEstado({loading: false, error: 'DNI inválido'})
+        setEstado({loading: false, error: error.response.data.message})
       } else{
         setEstado({loading: false, error: error.message})
       }

@@ -1,11 +1,12 @@
 .fondo1{
-    background-color: #ecf4ff;
+  background-color: #ecf4ff;
 }
 
 .fullHeight {
-    min-height: 92vh;
+  min-height: 90vh;
 }
 
 .barra {
-    overflow-y: auto; max-height: 66vh; 
+  overflow-y: auto;
+  max-height: 66vh;
 }

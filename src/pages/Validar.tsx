@@ -40,7 +40,7 @@ export function Validar() {
       telefono: data.telefono,
       codigo: data.codigo
 
-    },{ headers: {"Authorization" : `Bearer ${data.token}`} })
+    },{ headers: {"Authorization" : `Bearer ${data.token}`},timeout:config.timeOut })
     .then(function (response) {
       if (response.status=== 200){
         const {token, agente} = response.data
@@ -54,7 +54,7 @@ export function Validar() {
     })
     .catch(function (error) {
       if(error.response.status=== 401){
-        setEstado({loading: false,error: 'Codigo incorrecto'})
+        setEstado({loading: false,error: 'Código incorrecto'})
       } else{
         setEstado({loading:false, error:error})
       }
