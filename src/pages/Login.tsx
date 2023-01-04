@@ -82,21 +82,5 @@ if (estado.loading)
   </Form>    
 </div>
 
-<<<<<<< HEAD
-=======
-      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-      <h1>Ingresa tu número de teléfono para validar tu acceso:</h1>
-        <Form.Label>Telefono</Form.Label>
-        <Form.Control type="text"  value={data.telefono} onChange={(e: InputEvent)=>setData({...data,telefono:e.target.value})}/>
-        <div className="text-danger"> {estado.error}</div>
-        <Button variant="primary" type="button" className="w-100" onClick={() => validar()}>
-        Enviar
-      </Button>
-
-      </Form.Group>
-
-    </Form>
-    </div>
->>>>>>> origin/main
   )
 }
