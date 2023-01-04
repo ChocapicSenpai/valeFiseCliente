@@ -81,7 +81,7 @@ export function Validar() {
       <h2> Ingresa el código de seguridad que te enviamos a tu teléfono via SMS</h2>
         <Form.Label className="mt-4">Código de seguridad</Form.Label>
         <Form.Control type="text" value={data.codigo} onChange={(e: InputEvent)=>setData({...data,codigo:e.target.value})}  />
-        <div className="text-danger">{estado.error}</div>
+        {estado.error}
         <Link to="/login">Volver a enviar el código</Link>
         <Button variant="primary" type="button" className="w-100 mt-4" onClick={() => validate()}>
         Verificar

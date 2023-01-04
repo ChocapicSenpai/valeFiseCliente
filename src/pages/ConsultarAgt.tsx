@@ -66,13 +66,14 @@ export function ConsultarAgt(){
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label className="mt-4">DNI</Form.Label>
               <Form.Control type="text"  value={dni} onChange={(e)=>setDni(e.target.value)}/>
-              <div className="text-danger">{estado.error}</div>
+        <div className="text-danger">{estado.error}</div>
               <Button variant="primary" type="button" className="w-100 mt-2" onClick={()=>consulta()}
               >
               Consultar
             </Button>
             </Form.Group>
           </Form>
+
           {gVales.map((g)=><Grupo key={g.periodo} periodo={String(g.periodo)} items={g.items}/>)}
     </div>)
 
