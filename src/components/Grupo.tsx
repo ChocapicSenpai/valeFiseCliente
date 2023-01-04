@@ -1,18 +1,22 @@
 import { Button, Card, Form} from "react-bootstrap"
 import { ValeC } from "./Vale"
 import {ValesG} from "./../utils/Funciones"
+import { getStringPeriod } from "../utils/StringPeriod"
 export function Grupo({periodo, items}:ValesG) {
+
   return (
    <>
-    <Card className="h-100">
-    <Card.Body className="d-flex flex-column">
-    <Card.Title className="d-flex center ">
-    <h1>{periodo}</h1>
-    </Card.Title>
 
+<div className="barra" >
+<div className="card text-dark bg-light mb-3" >
+  <div className="card-body ps-0 pe-0 pb-0">
+    <div className="card-title">
+    <h2 className="ps-2 text-center">Vale {getStringPeriod(periodo)}</h2>
+    </div>
     {items.map((vale)=><ValeC key={vale.idVale} {...vale}/>)}
-    </Card.Body>
-    </Card>
+  </div>
+</div>
+</div>
     </>
   )
 }

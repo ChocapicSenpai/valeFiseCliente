@@ -3,20 +3,20 @@ import {Vale} from "./../utils/Funciones"
 
 export function ValeC({nroVale, tipoGen,  periodo, fcaducidad}:Vale){
   return (
-<Card className="h-100">
-            <Card.Body className="d-flex flex-column">
-                <Card.Title className="d-flex justify-content-between align-items-baseline mb-4">
-                    <span className="fs-2">{`Vale: ${nroVale}`}</span>
-                </Card.Title>
-                <div className="mt-auto">
-                  <Card.Text>
-                  {`Caduca: ${fcaducidad}`}
-                  <br/>
-                  {`Tipo: ${tipoGen}`}
-                  </Card.Text>
 
-                </div>
-            </Card.Body>
-        </Card>
-  )
+    <div className="card rounded-1 border-0 border-top mb-0">
+      <div className="card-body">
+        <div className="card-title">
+          <span className="fs-2">{`${nroVale}`}</span>
+        </div>
+        <p className="card-text">
+        {`Caduca: ${fcaducidad}`}
+        <br/>
+        {`Tipo: ${tipoGen}`}
+        </p>
+
+      </div>
+    </div>
+
+  ) 
 }

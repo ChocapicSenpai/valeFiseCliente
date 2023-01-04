@@ -37,3 +37,4 @@ export function groupArrayByPeriod (arr:Vale[]): ValesG[]
   })
   return gVales
 };
+
