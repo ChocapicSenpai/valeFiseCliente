@@ -4,7 +4,7 @@ import  ensa  from "../assets/ensa.jpg"
 
 export function Navbar() {
     return (
-        <Container >
+        <Container style={{ position: "sticky", top: "0", zIndex:"1020" }}>
         <div className="row justify-content-center">
             <div className="col-sm-12 col-md-4 p-0" >
                 <NavbarBs sticky="top" className="bg-white shadow-sm" >
