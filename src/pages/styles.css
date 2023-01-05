@@ -3,10 +3,6 @@
 }
 
 .fullHeight {
-    height: 90vh;
+    min-height: 90vh;
 }
 
-.barra {
-    overflow-y: auto; 
-    height: 64vh; 
-}

@@ -7,7 +7,6 @@ export function Grupo({periodo, items}:ValesG) {
   return (
    <>
 
-<div className="barra" >
 <div className="card text-dark bg-light mb-3" >
   <div className="card-body ps-0 pe-0 pb-0">
     <div className="card-title">
@@ -15,7 +14,6 @@ export function Grupo({periodo, items}:ValesG) {
     </div>
     {items.map((vale)=><ValeC key={vale.idVale} {...vale}/>)}
   </div>
-</div>
 </div>
     </>
   )

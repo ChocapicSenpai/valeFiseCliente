@@ -6,10 +6,10 @@ export function Navbar() {
     return (
         <Container >
         <div className="row justify-content-center">
-            <div className="col-sm-12 col-md-4 p-0">
-                <NavbarBs sticky="top" className="bg-white shadow-sm">
+            <div className="col-sm-12 col-md-4 p-0" >
+                <NavbarBs sticky="top" className="bg-white shadow-sm" >
 
-                        <Nav className="me-auto">
+                        <Nav className="me-auto" >
                             <Nav.Link to="/" as={NavLink} className="m-0">
                                 <img src={ensa} alt="ensa" height="40" className="d-inline-block" ></img>
                             </Nav.Link>
