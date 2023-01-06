@@ -1,13 +1,16 @@
 import { useState } from "react"
 import { Button } from "react-bootstrap"
 import { useLocalStorage } from "../hooks/useLocalStorage"
+import styles from './Logout.module.css';
 type ModalParams = {
   nombres: string
 }
 function ModalLogout({nombres}:ModalParams){
-  return <div>
-    {nombres}
-  </div>
+  return <div id="myDropdown" className="dropdown-content">
+  <a href="#">Link 1</a>
+  <a href="#">Link 2</a>
+  <a href="#">Link 3</a>
+</div>
 }
 export function Logout(){
   const [token] = useLocalStorage('token',"")
@@ -18,6 +21,9 @@ export function Logout(){
   }
   return (
     <>
+    <div>
+
+
   {token&&<Button style={{ width: "3rem", height: "3rem", position: "relative" }}
   variant="outline-primary"
   className="rounded-circle"
@@ -39,6 +45,7 @@ fill="none">
 
 }
 {mostrar&&<ModalLogout nombres={agente}/>}
+</div>
 </>
 )
 }
