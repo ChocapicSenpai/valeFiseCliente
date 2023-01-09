@@ -25,7 +25,7 @@ export function ConsultarAgt(){
   function consulta(){
     setGvales([])
     setEstado({loading: true})
-    axios.post(`${config.urlBase}/valesfise/obtener`, {
+    axios.post(`${config.urlBase}/obtener`, {
       idapp: config.idApp,
       dni: dni
     },{ headers: {"Authorization" : `Bearer ${token}`},timeout: config.timeOut })

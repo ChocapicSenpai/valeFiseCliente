@@ -1,7 +1,7 @@
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios  from "axios"
@@ -17,6 +17,7 @@ type Estado = {
 }
 
 export function Validar() {
+  const location = useLocation()
   const {data, setData} = useFise()
   const navigate = useNavigate();
   const [token, setToken] = useLocalStorage('token',"");
@@ -25,6 +26,7 @@ export function Validar() {
 
 
   const validate = ()=>{
+
     if (!data.codigo || data.codigo === ""){
       setEstado({loading: false, error:"Ingrese Código"})
       return
@@ -35,7 +37,7 @@ export function Validar() {
     }
     setEstado({loading:true})
 
-    axios.post(`${config.urlBase}/autenticacion/validate`, {
+    axios.post(`${config.urlBase}/validate`, {
       idapp: config.idApp,
       telefono: data.telefono,
       codigo: data.codigo

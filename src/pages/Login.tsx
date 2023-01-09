@@ -1,7 +1,7 @@
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { useState } from 'react';
 import axios  from "axios"
@@ -14,14 +14,15 @@ type Estado = {
   error?: string | undefined
 }
 export function Login() {
+  const location = useLocation()
   const {data, setData} = useFise();
   const navigate = useNavigate();
-
   const [estado, setEstado]=useState<Estado>({loading:false, error:""})
 
 
 
  const validar = ()=>{
+
   setEstado({loading:true})
   if (!data.telefono || data.telefono === ""){
     setEstado({loading: false, error:"Ingrese Teléfono"})
@@ -31,7 +32,7 @@ export function Login() {
     setEstado({loading: false, error:"Teléfono debe ser 9 dígitos"})
     return
   }
-  axios.post(`${config.urlBase}/autenticacion/login`, {
+  axios.post(`${config.urlBase}/login`, {
     idapp: config.idApp,
     telefono: data.telefono
   },{timeout:config.timeOut})

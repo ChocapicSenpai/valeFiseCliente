@@ -30,7 +30,7 @@ export function ConsultarBnf(){
     }
     setEstado({loading: true})
     setGvales([])
-    axios.post(`${config.urlBase}/valesfise/obtenerfree`, {
+    axios.post(`${config.urlBase}/obtenerfree`, {
       idapp: config.idApp,
       dni: dni
     },{timeout:config.timeOut})
