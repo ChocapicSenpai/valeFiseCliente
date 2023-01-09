@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Button, Card, Form} from "react-bootstrap"
 import axios  from "axios"
 import { Grupo } from "../components/Grupo"
-import { ValesG} from "../utils/Funciones"
+import { ValesG, isNumber} from "../utils/Funciones"
 import {groupArrayByPeriod} from "../utils/Funciones"
 import {config} from "./../config/"
 
@@ -16,13 +16,25 @@ type Estado = {
 
 export function ConsultarAgt(){
   const [dni, setDni] = useState("")
-  const {data, setData} = useFise()
   const [estado, setEstado]=useState<Estado>({loading:false, error:""})
   const [gVales, setGvales] = useState<ValesG[]>([])
   const [token] = useLocalStorage('token',"")
   const [agente] = useLocalStorage('agente',"")
 
+  function setValor(valor:string){
+    if (isNumber(valor))
+      setDni(valor)
+  }
+
   function consulta(){
+    if (!dni || dni === ""){
+      setEstado({loading: false, error:"Ingrese DNI"})
+      return
+    }
+    if (dni.length !== 8){
+      setEstado({loading: false, error:"DNI debe ser 8 dígitos"})
+      return
+    }
     setGvales([])
     setEstado({loading: true})
     axios.post(`${config.urlBase}/obtener`, {
@@ -64,8 +76,9 @@ export function ConsultarAgt(){
       <h2>{`${agente}` }</h2>
       <Form >
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label className="mt-4">DNI</Form.Label>
-              <Form.Control type="text"  value={dni} onChange={(e)=>setDni(e.target.value)}/>
+              <Form.Label className="mt-4">DNI </Form.Label>
+              <Form.Control type="text"   value={dni} onChange={(e)=>setValor(e.target.value)} maxLength={8}/>
+
         <div className="text-danger">{estado.error}</div>
               <Button variant="primary" type="button" className="w-100 mt-2" onClick={()=>consulta()}
               >

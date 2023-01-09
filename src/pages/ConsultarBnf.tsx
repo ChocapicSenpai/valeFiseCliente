@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Button, Card, Form} from "react-bootstrap"
 import axios  from "axios"
 import { Grupo } from "../components/Grupo"
-import { ValesG} from "./../utils/Funciones"
+import { ValesG, isNumber} from "./../utils/Funciones"
 import {groupArrayByPeriod} from "./../utils/Funciones"
 import "./styles.css"
 import Spinner from 'react-bootstrap/Spinner';
@@ -13,12 +13,15 @@ type Estado = {
   error?: string | undefined
 }
 
-
 export function ConsultarBnf(){
   const [dni, setDni] = useState("")
   const [estado, setEstado]=useState<Estado>({loading:false, error:""})
   const [gVales, setGvales] = useState<ValesG[]>([])
 
+  function setValor(valor:string){
+    if (isNumber(valor))
+      setDni(valor)
+  }
   function consulta(){
     if (!dni || dni === ""){
       setEstado({loading: false, error:"Ingrese DNI"})
@@ -71,8 +74,9 @@ export function ConsultarBnf(){
     <Form >
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
 
-            <Form.Label className="mt-4">DNI</Form.Label>
-            <Form.Control type="text" value={dni} onChange={(e)=>setDni(e.target.value)} maxLength={8}/>
+            <Form.Label className="mt-4">DNI       </Form.Label>
+            <Form.Control type="text" value={dni} onChange={(e)=>setValor(e.target.value)} maxLength={8}/>
+
             <div className="text-danger">{estado.error}</div>
             <Button variant="primary" type="button" className="w-100 mt-2" onClick={()=>consulta()}
             >

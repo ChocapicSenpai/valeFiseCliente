@@ -7,6 +7,7 @@ import { useState } from 'react';
 import axios  from "axios"
 import {useFise} from "./../context/FiseContext"
 import Spinner from 'react-bootstrap/Spinner';
+import { isNumber } from '../utils/Funciones';
 import {config} from "./../config/"
 type InputEvent = React.ChangeEvent<HTMLInputElement>;
 type Estado = {
@@ -19,7 +20,10 @@ export function Login() {
   const navigate = useNavigate();
   const [estado, setEstado]=useState<Estado>({loading:false, error:""})
 
-
+function setTelefono(valor:string){
+  if (isNumber(valor))
+  setData({...data,telefono:valor})
+}
 
  const validar = ()=>{
 
@@ -72,8 +76,9 @@ if (estado.loading)
   <Form >
     <Form.Group controlId="exampleForm.ControlInput1">
         <h2>Ingresa tu número de teléfono para validar tu acceso:</h2>
-          <Form.Label className="mt-4">Telefono</Form.Label>
-          <Form.Control type="text"  value={data.telefono} onChange={(e: InputEvent)=>setData({...data,telefono:e.target.value})}/>
+          <Form.Label className="mt-4 ">Telefono </Form.Label>
+          <Form.Control  type="text"  value={data.telefono} onChange={(e: InputEvent)=>setTelefono(e.target.value)} maxLength={10} minLength={8}/>
+
           <div className="text-danger">{estado.error}</div>
           <Button variant="primary" type="button" className="w-100 mt-2" onClick={() => validar()}>
           Enviar

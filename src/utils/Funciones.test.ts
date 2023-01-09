@@ -1,4 +1,4 @@
-import {groupArrayByPeriod, Vale} from "./Funciones"
+import {groupArrayByPeriod, Vale, isNumber} from "./Funciones"
 
 describe('Test for Funciones',()=>{
 
@@ -101,4 +101,14 @@ describe('Test for Funciones',()=>{
    expect(grupos.length).toEqual(2)
    expect(grupos[0].items.length).toEqual(2)
   })
+
+test("Given a char a then should return false",()=>{
+
+  expect(isNumber('a')).toBe(false)
+})
+
+test("Given a char 8 then should return true",()=>{
+  expect(isNumber('8')).toBe(true)
+})
+
 })

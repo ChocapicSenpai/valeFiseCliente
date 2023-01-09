@@ -21,7 +21,7 @@ const location = useLocation()
       <div className="row justify-content-center">
         <div className="col-sm-12 col-md-4 border rounded-bottom fondo1 fullHeight">
             <Routes>
-              <Route path="/valesfise" element={<ConsultarBnf/>} />
+              <Route  path="/valesfise" element={<ConsultarBnf/>} />
               <Route path="/valesfise/agente" element={<ProtectedRoute><ConsultarAgt/></ProtectedRoute>} />
               <Route path="/valesfise/validar" element={<Validar />} />
               <Route path="/valesfise/login" element={<Login />} />

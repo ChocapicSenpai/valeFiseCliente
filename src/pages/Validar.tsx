@@ -9,6 +9,7 @@ import {config} from "./../config/"
 import {useFise} from "./../context/FiseContext"
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import Spinner from 'react-bootstrap/Spinner';
+import { isNumber } from '../utils/Funciones';
 
 type InputEvent = React.ChangeEvent<HTMLInputElement>;
 type Estado = {
@@ -24,7 +25,10 @@ export function Validar() {
   const [agente, setAgente] = useLocalStorage('agente',"");
   const [estado, setEstado]=useState<Estado>({loading:false, error:""})
 
-
+  function setCodigo(valor:string){
+    if (isNumber(valor))
+    setData({...data,codigo:valor})
+  }
   const validate = ()=>{
 
     if (!data.codigo || data.codigo === ""){
@@ -81,9 +85,11 @@ export function Validar() {
       <Form >
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
       <h2> Ingresa el código de seguridad que te enviamos a tu teléfono via SMS</h2>
-        <Form.Label className="mt-4">Código de seguridad</Form.Label>
-        <Form.Control type="text" value={data.codigo} onChange={(e: InputEvent)=>setData({...data,codigo:e.target.value})}  />
-        {estado.error}
+        <Form.Label className="mt-4 form-label" >Código de seguridad</Form.Label>
+        <Form.Control type="text" className= "form-control"value={data.codigo} onChange={(e: InputEvent)=>setCodigo(e.target.value)}  maxLength={4}/>
+
+        <div className="text-danger">{estado.error}</div>
+        {estado.error && <br/>}
         <Link to="/login">Volver a enviar el código</Link>
         <Button variant="primary" type="button" className="w-100 mt-4" onClick={() => validate()}>
         Verificar

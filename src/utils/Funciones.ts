@@ -38,3 +38,14 @@ export function groupArrayByPeriod (arr:Vale[]): ValesG[]
   return gVales
 };
 
+export function isNumber(value:string)
+{
+  try{
+    const number = Number(value)
+    return typeof number === 'number' && isFinite(number);
+  }catch(err){
+    return false
+  }
+
+}
+
