@@ -11,8 +11,7 @@ import { ProtectedRoute } from "./router/ProtectedRoute";
 import {config} from "./config"
 
 function App() {
-const location = useLocation()
-  const path = config.path
+
   return (
     <FiseProvider>
     <Navbar/>
