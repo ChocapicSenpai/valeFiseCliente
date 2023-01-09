@@ -42,7 +42,7 @@ export function Login() {
       const {token} = response.data
       setData({...data,token})
       setEstado({loading: false})
-      navigate(`/validar`)
+      navigate(`/valesfise/validar`)
     }
   })
   .catch(function (error) {

@@ -13,7 +13,7 @@ export const ProtectedRoute = ({children}: Props) => {
   const location = useLocation()
   const [token] = useLocalStorage('token',"")
   if (!token) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/valesfise/login" replace />;
   }
 
   return children;

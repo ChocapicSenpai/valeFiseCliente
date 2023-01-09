@@ -50,7 +50,7 @@ export function Validar() {
         setToken(token);
         setAgente(agente);
         setEstado({loading: false})
-        navigate(`/agente`)
+        navigate(`/valesfise/agente`)
       }
 
     })
