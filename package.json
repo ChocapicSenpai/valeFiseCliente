@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --base=/valesfise/",
+    "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "jest --forceExit"
   },
