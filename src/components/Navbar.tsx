@@ -3,11 +3,6 @@ import { NavLink } from "react-router-dom"
 import  ensa  from "../assets/ensa.jpg"
 import { Logout } from "./Logout"
 
-interface IProps {
-  isMenuOpen: boolean;
-  setIsMenuOpen: (value: boolean | ((prevVar: boolean) => boolean)) => void;
-}
-
 export function Navbar() {
     return (
         <Container style={{ position: "sticky", top: "0", zIndex:"1020" }}>

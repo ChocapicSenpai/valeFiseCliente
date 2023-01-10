@@ -32,8 +32,7 @@
 
 /* Links inside the dropdown */
 .dropdownContent span {
-  color: black;
-  padding: 12px 16px;
+  padding: 2px 6px;
   display: block;
   cursor: pointer;
   color: #2980B9;

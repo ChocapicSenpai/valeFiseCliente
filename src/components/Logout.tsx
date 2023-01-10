@@ -9,10 +9,6 @@ type ModalParams = {
   nombres?: string
 }
 
-
-
-
-
 export function Logout(){
   const {data, setValores } = useFise()
 
