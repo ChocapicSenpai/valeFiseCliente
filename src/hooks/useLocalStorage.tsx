@@ -2,6 +2,7 @@ import { useState } from "react";
 
 // Hook
 export function useLocalStorage(key: string, initialValue: string) {
+
   // State to store our value
   // Pass initial state function to useState so logic is only executed once
   const [storedValue, setStoredValue] = useState(() => {
@@ -37,5 +38,11 @@ export function useLocalStorage(key: string, initialValue: string) {
       console.log(error);
     }
   };
-  return [storedValue, setValue];
+  const removeItem = ()=>{
+    setStoredValue("");
+    if (typeof window !== "undefined") {
+      window.localStorage.removeItem(key);
+    }
+  }
+  return [storedValue, setValue, removeItem];
 }

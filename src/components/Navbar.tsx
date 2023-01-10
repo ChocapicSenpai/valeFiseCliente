@@ -2,6 +2,12 @@ import { Container, Navbar as NavbarBs, Nav, Button } from "react-bootstrap"
 import { NavLink } from "react-router-dom"
 import  ensa  from "../assets/ensa.jpg"
 import { Logout } from "./Logout"
+
+interface IProps {
+  isMenuOpen: boolean;
+  setIsMenuOpen: (value: boolean | ((prevVar: boolean) => boolean)) => void;
+}
+
 export function Navbar() {
     return (
         <Container style={{ position: "sticky", top: "0", zIndex:"1020" }}>
@@ -10,12 +16,12 @@ export function Navbar() {
                 <NavbarBs className="bg-white shadow-sm" >
 
                         <Nav className="me-auto" >
-                            <Nav.Link to="/" as={NavLink} className="m-0">
+                            <Nav.Link to="/valesfise" as={NavLink} className="m-0">
                                 <img src={ensa} alt="ensa" height="40" className="d-inline-block" ></img>
                             </Nav.Link>
 
                         </Nav>
-                        <Logout/>
+                        <Logout />
                 </NavbarBs>
             </div>
         </div>

@@ -15,14 +15,13 @@ type Estado = {
   error?: string | undefined
 }
 export function Login() {
-  const location = useLocation()
-  const {data, setData} = useFise();
+  const {data, setValores} = useFise();
   const navigate = useNavigate();
   const [estado, setEstado]=useState<Estado>({loading:false, error:""})
 
 function setTelefono(valor:string){
   if (isNumber(valor))
-  setData({...data,telefono:valor})
+  setValores({...data,telefono:valor})
 }
 
  const validar = ()=>{
@@ -44,7 +43,7 @@ function setTelefono(valor:string){
 
     if (response.status=== 200){
       const {token} = response.data
-      setData({...data,token})
+      setValores({...data,tokenIni:token})
       setEstado({loading: false})
       navigate(`/valesfise/validar`)
     }

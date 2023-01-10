@@ -1,5 +1,4 @@
 
-import { Container } from "react-bootstrap";
 import {Login} from "./pages/Login"
 import { Routes, Route, useLocation } from "react-router-dom"
 import {Validar} from "./pages/Validar"
@@ -8,11 +7,12 @@ import {ConsultarBnf} from "./pages/ConsultarBnf"
 import {Navbar} from "./components/Navbar"
 import {FiseProvider} from "./context/FiseContext"
 import { ProtectedRoute } from "./router/ProtectedRoute";
-import {config} from "./config"
+import { useLocalStorage } from "./hooks/useLocalStorage"
 
 function App() {
-
   return (
+
+
     <FiseProvider>
     <Navbar/>
 
@@ -28,8 +28,8 @@ function App() {
           </div>
         </div>
     </div>
-    </FiseProvider>
-  )
+    </FiseProvider>)
+
 }
 
 export default App

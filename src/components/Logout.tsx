@@ -1,40 +1,73 @@
-import { useState } from "react"
+import { useEffect, useRef,useState } from "react"
 import { Button } from "react-bootstrap"
 import { useLocalStorage } from "../hooks/useLocalStorage"
 import styles from './Logout.module.css';
+import { useNavigate } from "react-router-dom";
+import {useFise} from "./../context/FiseContext"
+
 type ModalParams = {
-  nombres: string
+  nombres?: string
 }
-function ModalLogout({nombres}:ModalParams){
-  return <div id="myDropdown" className="dropdown-content">
-  <a href="#">Link 1</a>
-  <a href="#">Link 2</a>
-  <a href="#">Link 3</a>
-</div>
-}
+
+
+
+
+
 export function Logout(){
-  const [token] = useLocalStorage('token',"")
-  const [agente] = useLocalStorage('agente',"")
-  const [mostrar, setMostrar] = useState(false)
+  const {data, setValores } = useFise()
+
+  const ref = useRef<HTMLDivElement | null>(null)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const navigate = useNavigate()
+
+  function handleCloseSesion(){
+    if (typeof window !== "undefined") {
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('agente');
+    }
+    setValores({...data, token:"", agente:""})
+    setIsMenuOpen(false)
+    navigate('/valesfise/login')
+  }
+  function ModalLogout({nombres}:ModalParams){
+    return <div id="myDropdown" className={styles.dropdownContent}>
+    <span onClick={handleCloseSesion}>Cerrar sesion</span>
+  </div>
+  }
+
+
+  useEffect(()=>{
+    const checkIfClickedOutside = (e: MouseEvent) =>{
+
+      if (ref.current && !ref.current.contains(e.target as HTMLElement)){
+        setIsMenuOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", checkIfClickedOutside)
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener("mousedown", checkIfClickedOutside)
+    }
+  }, [isMenuOpen])
   const handleClick=()=>{
-    setMostrar(true)
+    setIsMenuOpen((prevVar)=>!prevVar)
   }
   return (
     <>
-    <div>
+    <div className={styles.dropdown} ref={ref}>
 
 
-  {token&&<Button style={{ width: "3rem", height: "3rem", position: "relative" }}
+  {data.token&&<Button style={{ width: "3rem", height: "3rem", position: "relative" }}
   variant="outline-primary"
-  className="rounded-circle"
+  className="rounded-circle dropbtn"
   onClick={handleClick}
 >
 <svg viewBox="0 0 64 64"
 xmlns="http://www.w3.org/2000/svg"
-stroke-width="3"
+strokeWidth="3"
 stroke="#000000"
 fill="none">
-  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
   <g id="SVGRepo_iconCarrier">
     <circle cx="32" cy="18.14" r="11.14"></circle>
     <path d="M54.55,56.85A22.55,22.55,0,0,0,32,34.3h0A22.55,22.55,0,0,0,9.45,56.85Z"></path>
@@ -44,7 +77,7 @@ fill="none">
 </Button>
 
 }
-{mostrar&&<ModalLogout nombres={agente}/>}
+{isMenuOpen&&<ModalLogout nombres={data.agente}/>}
 </div>
 </>
 )

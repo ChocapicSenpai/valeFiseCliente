@@ -6,7 +6,6 @@ import { ValesG, isNumber} from "./../utils/Funciones"
 import {groupArrayByPeriod} from "./../utils/Funciones"
 import "./styles.css"
 import Spinner from 'react-bootstrap/Spinner';
-
 import {config} from "./../config/"
 type Estado = {
   loading : boolean
@@ -14,10 +13,10 @@ type Estado = {
 }
 
 export function ConsultarBnf(){
+
   const [dni, setDni] = useState("")
   const [estado, setEstado]=useState<Estado>({loading:false, error:""})
   const [gVales, setGvales] = useState<ValesG[]>([])
-
   function setValor(valor:string){
     if (isNumber(valor))
       setDni(valor)

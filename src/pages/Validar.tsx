@@ -19,7 +19,7 @@ type Estado = {
 
 export function Validar() {
   const location = useLocation()
-  const {data, setData} = useFise()
+  const {data, setValores} = useFise()
   const navigate = useNavigate();
   const [token, setToken] = useLocalStorage('token',"");
   const [agente, setAgente] = useLocalStorage('agente',"");
@@ -27,7 +27,7 @@ export function Validar() {
 
   function setCodigo(valor:string){
     if (isNumber(valor))
-    setData({...data,codigo:valor})
+    setValores({...data,codigo:valor})
   }
   const validate = ()=>{
 
@@ -46,11 +46,11 @@ export function Validar() {
       telefono: data.telefono,
       codigo: data.codigo
 
-    },{ headers: {"Authorization" : `Bearer ${data.token}`},timeout:config.timeOut })
+    },{ headers: {"Authorization" : `Bearer ${data.tokenIni}`},timeout:config.timeOut })
     .then(function (response) {
       if (response.status=== 200){
         const {token, agente} = response.data
-        setData({...data,token, agente: agente})
+        setValores({...data,token, agente})
         setToken(token);
         setAgente(agente);
         setEstado({loading: false})
@@ -90,7 +90,7 @@ export function Validar() {
 
         <div className="text-danger">{estado.error}</div>
         {estado.error && <br/>}
-        <Link to="/login">Volver a enviar el código</Link>
+        <Link to="/valesfise/login">Volver a enviar el código</Link>
         <Button variant="primary" type="button" className="w-100 mt-4" onClick={() => validate()}>
         Verificar
       </Button>
