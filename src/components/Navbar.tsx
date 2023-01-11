@@ -1,7 +1,7 @@
 import { Container, Navbar as NavbarBs, Nav, Button } from "react-bootstrap"
 import { NavLink } from "react-router-dom"
 import  ensa  from "../assets/ensa.jpg"
-import { Logout } from "./Logout"
+// import { Logout } from "./Logout"
 
 export function Navbar() {
     return (
@@ -16,7 +16,7 @@ export function Navbar() {
                             </Nav.Link>
 
                         </Nav>
-                        <Logout />
+                        {/* <Logout /> */}
                 </NavbarBs>
             </div>
         </div>
