@@ -7,7 +7,6 @@ import {ConsultarBnf} from "./pages/ConsultarBnf"
 import {Navbar} from "./components/Navbar"
 import {FiseProvider} from "./context/FiseContext"
 import { ProtectedRoute } from "./router/ProtectedRoute";
-import { useLocalStorage } from "./hooks/useLocalStorage"
 
 function App() {
   return (
