@@ -1,3 +1,8 @@
+*{
+  margin:0px;
+  padding:0px;
+}
+
 .fondo1{
   background-color: #ecf4ff;
 }
@@ -5,4 +10,5 @@
 .fullHeight {
     min-height: 90vh;
 }
+
 

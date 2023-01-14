@@ -54,7 +54,7 @@ export function Validar() {
         setToken(token);
         setAgente(agente);
         setEstado({loading: false})
-        navigate(`/valesfise/agente`)
+        navigate(`/agente`)
       }
 
     })
@@ -90,7 +90,7 @@ export function Validar() {
 
         <div className="text-danger">{estado.error}</div>
         {estado.error && <br/>}
-        <Link to="/valesfise/login">Volver a enviar el código</Link>
+        <Link to="/login">Volver a enviar el código</Link>
         <Button variant="primary" type="button" className="w-100 mt-4" onClick={() => validate()}>
         Verificar
       </Button>

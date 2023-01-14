@@ -7,22 +7,22 @@ import {ConsultarBnf} from "./pages/ConsultarBnf"
 import {Navbar} from "./components/Navbar"
 import {FiseProvider} from "./context/FiseContext"
 import { ProtectedRoute } from "./router/ProtectedRoute";
-
+import "./pages/styles.css"
 function App() {
   return (
 
 
     <FiseProvider>
+      <div className="container">
     <Navbar/>
 
-    <div className="container ps-2 pe-2">
       <div className="row justify-content-center">
-        <div className="col-sm-12 col-md-4 border rounded-bottom fondo1 fullHeight">
+        <div className="col-sm-12 col-md-4 border rounded-bottom fondo1 ">
             <Routes>
-              <Route  path="/valesfise" element={<ConsultarBnf/>} />
-              <Route path="/valesfise/agente" element={<ProtectedRoute><ConsultarAgt/></ProtectedRoute>} />
-              <Route path="/valesfise/validar" element={<Validar />} />
-              <Route path="/valesfise/login" element={<Login />} />
+              <Route  path="/" element={<ConsultarBnf/>} />
+              <Route path="/agente" element={<ProtectedRoute><ConsultarAgt/></ProtectedRoute>} />
+              <Route path="/validar" element={<Validar />} />
+              <Route path="/login" element={<Login />} />
             </Routes>
           </div>
         </div>

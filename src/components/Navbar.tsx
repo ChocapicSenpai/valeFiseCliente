@@ -5,14 +5,17 @@ import  ensa  from "../assets/ensa.jpg"
 
 export function Navbar() {
     return (
-        <Container style={{ position: "sticky", top: "0", zIndex:"1020" }}>
+
+
+          <div className="col-sm-12 col-md-4 ">
+            <div  style={{ position: "sticky", top: "0", zIndex:"1020" }}>
         <div className="row justify-content-center">
-            <div className="col-sm-12 col-md-4 p-0" >
+
                 <NavbarBs className="bg-white shadow-sm" >
 
                         <Nav className="me-auto" >
-                            <Nav.Link to="/valesfise" as={NavLink} className="m-0">
-                                <img src={ensa} alt="ensa" height="40" className="d-inline-block" ></img>
+                            <Nav.Link to="/" as={NavLink} className="m-0">
+                                <img src={ensa} alt="ensa" height="40px" width="100px" className="d-inline-block" ></img>
                             </Nav.Link>
 
                         </Nav>
@@ -21,6 +24,7 @@ export function Navbar() {
             </div>
         </div>
 
-        </Container>
+        </div>
+
     )
 }

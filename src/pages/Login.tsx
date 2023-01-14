@@ -45,7 +45,7 @@ function setTelefono(valor:string){
       const {token} = response.data
       setValores({...data,tokenIni:token})
       setEstado({loading: false})
-      navigate(`/valesfise/validar`)
+      navigate(`/validar`)
     }
   })
   .catch(function (error) {

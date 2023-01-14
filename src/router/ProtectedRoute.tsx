@@ -11,7 +11,7 @@ type Props = {
 export const ProtectedRoute = ({children}: Props) => {
   const {data} = useFise()
   if (!data.token) {
-    return <Navigate to="/valesfise/login" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return children;
