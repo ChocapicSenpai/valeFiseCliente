@@ -7,11 +7,9 @@ export function Navbar() {
     return (
 
 
-          <div className="col-sm-12 col-md-4 ">
-            <div  style={{ position: "sticky", top: "0", zIndex:"1020" }}>
-        <div className="row justify-content-center">
+          <div className="col-sm-12 col-md-4 bg-white shadow-sm" style={{background:"red"}}>
 
-                <NavbarBs className="bg-white shadow-sm" >
+                {/* <NavbarBs className="bg-white shadow-sm" > */}
 
                         <Nav className="me-auto" >
                             <Nav.Link to="/" as={NavLink} className="m-0">
@@ -19,12 +17,12 @@ export function Navbar() {
                             </Nav.Link>
 
                         </Nav>
-                        {/* <Logout /> */}
-                </NavbarBs>
-            </div>
-        </div>
+                         {/* <Logout /> */}
+                {/* </NavbarBs> */}
 
         </div>
+
+
 
     )
 }

@@ -14,10 +14,15 @@ function App() {
 
     <FiseProvider>
       <div className="container">
-    <Navbar/>
+      {/* <div  style={{ position: "sticky", top: "0", zIndex:"1020" }}> */}
 
-      <div className="row justify-content-center">
-        <div className="col-sm-12 col-md-4 border rounded-bottom fondo1 ">
+        <header className="row justify-content-center sticky-top">
+
+      <Navbar/>
+        </header>
+        <div className="row justify-content-center ">
+
+        <div className="col-sm-12 col-md-4 border rounded-bottom fondo1 vh-100">
             <Routes>
               <Route  path="/" element={<ConsultarBnf/>} />
               <Route path="/agente" element={<ProtectedRoute><ConsultarAgt/></ProtectedRoute>} />
