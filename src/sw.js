@@ -1,12 +1,12 @@
 var cacheName = "vales2023";
 var appShellFiles = [
-  "/",
-  "/index.html",
-  "/registerSW.js",
-  "/assets/maskable_icon_x48.png",
-  "/assets/maskable_icon_x72.png",
-  "/assets/maskable_icon_x96.png",
-  "/assets/maskable_icon.png",
+  "/valesfise",
+  "/valesfise/index.html",
+  "/valesfise/registerSW.js",
+  "/valesfise/assets/maskable_icon_x48.png",
+  "/valesfise/assets/maskable_icon_x72.png",
+  "/valesfise/assets/maskable_icon_x96.png",
+  "/valesfise/assets/maskable_icon.png",
 
 ];
 self.addEventListener("install", (e) => {

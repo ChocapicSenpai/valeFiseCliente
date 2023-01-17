@@ -8,62 +8,84 @@ Editar el archivo index.html y agregar las siguientes lineas en el head:
 <link rel="manifest" href="/manifest.json">
   <script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
 ``` 
+Debe quedar de la siguiente forma
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/valesfise/vite.svg" />
+    <meta name="theme-color" content="#317EFB"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vales Fise</title>
+    <script type="module" crossorigin src="/valesfise/assets/index.60864356.js"></script>
+    <link rel="stylesheet" href="/valesfise/assets/index.1c15f215.css">
+   <link rel="apple-touch-icon" href="/valesfise/assets/ensa.dc45fe0c.jpg">
+  <link rel="manifest" href="/valesfise/manifest.json">
+  <script id="vite-plugin-pwa:register-sw" src="/valesfise/registerSW.js"></script> 
+  </head>
+  <body>
+    <div id="root"></div>
+    
+  </body>
+</html>
+```
 ## Paso 3:
 Verificar que en la carpeta /assets se encuentre los masked images para hacer responsiva la aplicación
 
-## Este archivo debe tener ciertas propiedades obligatorias como: start_url, name, icons, theme color para los analizadores lighhouse de los navegadores lo reconozcan como archivo instalable
+## Archivo manifest.json, este archivo debe tener ciertas propiedades obligatorias como: start_url, name, icons, theme color para los analizadores lighhouse de los navegadores lo reconozcan como archivo instalable
 ````json
 {
   "theme_color": "#f69435",
   "background_color": "#f69435",
   "display": "fullscreen",
-  "scope": "/",
+  "scope": "./valesfise",
   "id":"/",
-  "start_url": "/",
+  "start_url": "./",
   "name": "valesfise",
   "short_name": "valesfise",
   "description": "valesfise",
   "icons": [
       {
-          "src": "/assets/maskable_icon_x48.png",
+          "src": "/valesfise/assets/maskable_icon_x48.png",
           "sizes": "48x48",
           "type": "image/png",
-          "purpose": "any"
+          "purpose": "any maskable"
       },
       {
-          "src": "/assets/maskable_icon_x72.png",
+          "src": "/valesfise/assets/maskable_icon_x72.png",
           "sizes": "72x72",
           "type": "image/png",
           "purpose": "any"
       },
       {
-          "src": "/assets/maskable_icon_x96.png",
+          "src": "/valesfise/assets/maskable_icon_x96.png",
           "sizes": "96x96",
           "type": "image/png",
           "purpose": "any"
       },
 
       {
-          "src": "/assets/maskable_icon_x128.png",
+          "src": "/valesfise/assets/maskable_icon_x128.png",
           "sizes": "128x128",
           "type": "image/png",
-          "purpose": "any"
+          "purpose": "any maskable"
       },
 
       {
-        "src": "/assets/maskable_icon_x192.png",
+        "src": "/valesfise/assets/maskable_icon_x192.png",
         "sizes": "192x192",
         "type": "image/png",
         "purpose": "any"
     },
     {
-        "src": "/assets/maskable_icon_x384.png",
+        "src": "/valesfise/assets/maskable_icon_x384.png",
         "sizes": "384x384",
         "type": "image/png",
         "purpose": "any"
     },
       {
-          "src": "/assets/maskable_icon_x512.png",
+          "src": "/valesfise/assets/maskable_icon_x512.png",
           "sizes": "512x512",
           "type": "image/png",
           "purpose": "any"
@@ -73,11 +95,11 @@ Verificar que en la carpeta /assets se encuentre los masked images para hacer re
 }
 ````
 
-# 2. Archivo de registro del service worker
+# 2. Archivo de registro del service worker: registerSW.js
 
 ```js
 if('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {navigator.serviceWorker.register('/sw.js', { scope: '/' })})}
+  window.addEventListener('load', () => {navigator.serviceWorker.register('/valesfise/sw.js')})}
 
   window.addEventListener('beforeinstallprompt', (event) => {
     // Prevent the mini-infobar from appearing on mobile.
@@ -94,6 +116,7 @@ if('serviceWorker' in navigator) {
     // Clear the deferredPrompt so it can be garbage collected
     window.deferredPrompt = null;
   });
+
 ```
 # 3. Archivo index.html, tener cuidado de reemplazar por los nuevos arhivos
 ```html
@@ -101,18 +124,19 @@ if('serviceWorker' in navigator) {
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/valesfise/vite.svg" />
     <meta name="theme-color" content="#317EFB"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vales Fise</title>
-    <script type="module" crossorigin src="/assets/index.f71d88c1.js"></script>
-    <link rel="stylesheet" href="/assets/index.1c15f215.css">
-    <link rel="apple-touch-icon" href="/assets/ensa.dc45fe0c.jpg">
-  <link rel="manifest" href="/manifest.json">
-  <script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
+    <script type="module" crossorigin src="/valesfise/assets/index.60864356.js"></script>
+    <link rel="stylesheet" href="/valesfise/assets/index.1c15f215.css">
+   <link rel="apple-touch-icon" href="/valesfise/assets/ensa.dc45fe0c.jpg">
+  <link rel="manifest" href="/valesfise/manifest.json">
+  <script id="vite-plugin-pwa:register-sw" src="/valesfise/registerSW.js"></script> 
+  </head>
   <body>
     <div id="root"></div>
-
+    
   </body>
 </html>
 ```
@@ -120,13 +144,13 @@ if('serviceWorker' in navigator) {
 ```js
 var cacheName = "vales2023";
 var appShellFiles = [
-  "/",
-  "/index.html",
-  "/registerSW.js",
-  "/assets/maskable_icon_x48.png",
-  "/assets/maskable_icon_x72.png",
-  "/assets/maskable_icon_x96.png",
-  "/assets/maskable_icon.png",
+  "/valesfise",
+  "/valesfise/index.html",
+  "/valesfise/registerSW.js",
+  "/valesfise/assets/maskable_icon_x48.png",
+  "/valesfise/assets/maskable_icon_x72.png",
+  "/valesfise/assets/maskable_icon_x96.png",
+  "/valesfise/assets/maskable_icon.png",
 
 ];
 self.addEventListener("install", (e) => {
@@ -144,6 +168,7 @@ self.addEventListener("install", (e) => {
   self.addEventListener("fetch", (e) => {
     console.log("[Servicio Worker] Recurso obtenido " + e.request.url);
   });
+
 ```
 
 

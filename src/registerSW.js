@@ -1,5 +1,5 @@
 if('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {navigator.serviceWorker.register('/sw.js', { scope: '/' })})}
+  window.addEventListener('load', () => {navigator.serviceWorker.register('/valesfise/sw.js')})}
 
   window.addEventListener('beforeinstallprompt', (event) => {
     // Prevent the mini-infobar from appearing on mobile.
