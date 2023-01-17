@@ -12,7 +12,7 @@ export function Navbar() {
                 {/* <NavbarBs className="bg-white shadow-sm" > */}
 
                         <Nav className="me-auto" >
-                            <Nav.Link to="/" as={NavLink} className="m-0">
+                            <Nav.Link to="/valesfise" as={NavLink} className="m-0">
                                 <img src={ensa} alt="ensa" height="40px" width="100px" className="d-inline-block" ></img>
                             </Nav.Link>
 

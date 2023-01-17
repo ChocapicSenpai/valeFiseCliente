@@ -24,10 +24,10 @@ function App() {
 
         <div className="col-sm-12 col-md-4 border rounded-bottom fondo1 vh-100">
             <Routes>
-              <Route  path="/" element={<ConsultarBnf/>} />
-              <Route path="/agente" element={<ProtectedRoute><ConsultarAgt/></ProtectedRoute>} />
-              <Route path="/validar" element={<Validar />} />
-              <Route path="/login" element={<Login />} />
+              <Route  path="/valesfise" element={<ConsultarBnf/>} />
+              <Route path="/valesfise/agente" element={<ProtectedRoute><ConsultarAgt/></ProtectedRoute>} />
+              <Route path="/valesfise/validar" element={<Validar />} />
+              <Route path="/valesfise/login" element={<Login />} />
             </Routes>
           </div>
         </div>
