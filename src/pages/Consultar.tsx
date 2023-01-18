@@ -4,7 +4,7 @@ import axios  from "axios"
 import { Grupo } from "../components/Grupo"
 import { ValesG, isNumber} from "../utils/Funciones"
 import {groupArrayByPeriod} from "../utils/Funciones"
-import {config} from "./../config/"
+import {config} from "../config"
 
 import { useLocalStorage } from "../hooks/useLocalStorage"
 import { useFise } from "../context/FiseContext"
@@ -14,7 +14,7 @@ type Estado = {
   error?: string | undefined
 }
 
-export function ConsultarAgt(){
+export function Consultar(){
   const [dni, setDni] = useState("")
   const [estado, setEstado]=useState<Estado>({loading:false, error:""})
   const [gVales, setGvales] = useState<ValesG[]>([])
@@ -26,21 +26,34 @@ export function ConsultarAgt(){
       setDni(valor)
   }
 
-  function consulta(){
-    if (!dni || dni === ""){
-      setEstado({loading: false, error:"Ingrese DNI"})
-      return
-    }
-    if (dni.length !== 8){
-      setEstado({loading: false, error:"DNI debe ser 8 dígitos"})
-      return
-    }
-    setGvales([])
-    setEstado({loading: true})
+  function consultaAgente(){
     axios.post(`${config.urlBase}/obtener`, {
       idapp: config.idApp,
       dni: dni
     },{ headers: {"Authorization" : `Bearer ${token}`},timeout: config.timeOut })
+    .then(function (response) {
+      if (response.status=== 200){
+        const g = groupArrayByPeriod(response.data.vales)
+        setGvales(g)
+        setEstado({loading: false})
+
+      }
+  })
+    .catch(function (error) {
+
+      if(error.response?.status=== 400){
+        setEstado({loading: false, error: error.response.data.message})
+      } else{
+        setEstado({loading: false, error: error.message})
+      }
+    });
+  }
+
+  function consultaLibre(){
+    axios.post(`${config.urlBase}/obtenerfree`, {
+      idapp: config.idApp,
+      dni: dni
+    },{timeout:config.timeOut})
     .then(function (response) {
       if (response.status=== 200){
         const g = groupArrayByPeriod(response.data.vales)
@@ -53,11 +66,33 @@ export function ConsultarAgt(){
     .catch(function (error) {
 
       if(error.response?.status=== 400){
+
         setEstado({loading: false, error: error.response.data.message})
-      } else{
+      }else{
         setEstado({loading: false, error: error.message})
       }
     });
+
+  }
+
+
+  function consulta(){
+    if (!dni || dni === ""){
+      setEstado({loading: false, error:"Ingrese DNI"})
+      return
+    }
+    if (dni.length !== 8){
+      setEstado({loading: false, error:"DNI debe ser 8 dígitos"})
+      return
+    }
+    setGvales([])
+    setEstado({loading: true})
+if (token){
+  consultaAgente()
+} else {
+  consultaLibre()
+}
+
 
   }
   if (estado.loading)
@@ -72,8 +107,11 @@ export function ConsultarAgt(){
     return (
 
     <div className="p-4">
-      <h2>Bienvenido Agente</h2>
+      <div>
+      <h2>{agente?`Bienvenido Agente`:`Beneficiario FISE`}</h2>
       <h2>{`${agente}` }</h2>
+      </div>
+
       <Form >
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label className="mt-4">DNI </Form.Label>

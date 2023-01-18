@@ -25,9 +25,16 @@ export function Logout(){
     setIsMenuOpen(false)
     navigate('/valesfise/login')
   }
+  function handleLogin(){
+
+    setIsMenuOpen(false)
+    navigate('/valesfise/login')
+  }
+
   function ModalLogout({nombres}:ModalParams){
     return <div id="myDropdown" className={styles.dropdownContent}>
-    <span onClick={handleCloseSesion}>Cerrar sesion</span>
+    {data.token&&<span onClick={handleCloseSesion}>Cerrar sesion</span>}
+    {!data.token&&<span onClick={handleLogin}>Soy agente</span>}
   </div>
   }
 
@@ -53,7 +60,7 @@ export function Logout(){
     <div className={styles.dropdown} ref={ref}>
 
 
-  {data.token&&<Button style={{ width: "3rem", height: "3rem", position: "relative" }}
+  <Button style={{ width: "2.5rem", height: "2.5rem", position: "relative", marginTop:"5px" }}
   variant="outline-primary"
   className="rounded-circle dropbtn"
   onClick={handleClick}
@@ -72,7 +79,7 @@ fill="none">
 
 </Button>
 
-}
+
 {isMenuOpen&&<ModalLogout nombres={data.agente}/>}
 </div>
 </>
