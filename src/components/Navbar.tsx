@@ -6,7 +6,7 @@ import { Logout } from "./Logout"
 export function Navbar() {
     return (
 <div className="row">
-          <div className="col-2">
+          <div className="col-4">
                         <Nav className="me-auto" >
                             <Nav.Link to="/valesfise" as={NavLink} className="m-0">
                                 <img src={ensa} alt="ensa" height="40px" width="100px" className="d-inline-block" ></img>
@@ -14,12 +14,12 @@ export function Navbar() {
 
                         </Nav>
         </div>
-        <div className="col-8">
+        <div className="col-5">
 
         </div>
-        <div className="col-2">
-
+        <div className="col-3">
         <Logout />
+
         </div>
 </div>
 

@@ -57,10 +57,10 @@ export function Logout(){
   }
   return (
     <>
-    <div className={styles.dropdown} ref={ref}>
+    <div id="dropDown"className={styles.dropdown} ref={ref}>
 
 
-  <Button style={{ width: "2.5rem", height: "2.5rem", position: "relative", marginTop:"5px" }}
+  <Button style={{ width: "2.5rem", height: "2.5rem",  marginTop:"5px" }}
   variant="outline-primary"
   className="rounded-circle dropbtn"
   onClick={handleClick}
