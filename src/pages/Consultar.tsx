@@ -1,14 +1,19 @@
-import { useState } from "react"
+import { useState,useRef } from "react"
 import { Button, Card, Form} from "react-bootstrap"
 import axios  from "axios"
 import { Grupo } from "../components/Grupo"
 import { ValesG, isNumber} from "../utils/Funciones"
 import {groupArrayByPeriod} from "../utils/Funciones"
 import {config} from "../config"
+import { FaMapMarkerAlt } from 'react-icons/fa';
 
 import { useLocalStorage } from "../hooks/useLocalStorage"
 import { useFise } from "../context/FiseContext"
 import Spinner from 'react-bootstrap/Spinner';
+
+import ReCAPTCHA from 'react-google-recaptcha';
+
+
 type Estado = {
   loading : boolean
   error?: string | undefined
@@ -20,6 +25,9 @@ export function Consultar(){
   const [gVales, setGvales] = useState<ValesG[]>([])
   const [token] = useLocalStorage('token',"")
   const [agente] = useLocalStorage('agente',"")
+  const [mostrarBoton, setMostrarBoton] = useState(false)
+  const [recaptchaToken, setRecaptchaToken] = useState('');
+
 
   function setValor(valor:string){
     if (isNumber(valor))
@@ -74,7 +82,23 @@ export function Consultar(){
     });
 
   }
+  //
+  // const captcha = useRef<ReCAPTCHA>(null);
 
+  // const onChange=()=>{
+  //   if (captcha.current) {
+  //     console.log(captcha.current.getValue());
+  //   }
+  // }
+  const handleRecaptchaChange = (token: string | null) => {
+    if (token) {
+      setRecaptchaToken(token);
+      console.log(token)
+      
+    } 
+  };
+
+//
 
   function consulta(){
     if (!dni || dni === ""){
@@ -92,9 +116,9 @@ if (token){
 } else {
   consultaLibre()
 }
+setMostrarBoton(true); // Activar la visibilidad del botón
+}
 
-
-  }
   if (estado.loading)
   return (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
@@ -118,6 +142,25 @@ if (token){
               <Form.Control type="text"   value={dni} onChange={(e)=>setValor(e.target.value)} maxLength={8}/>
 
         <div className="text-danger">{estado.error}</div>
+        
+        <br/>
+
+            
+              {/* <div className="recaptcha">
+                <ReCAPTCHA
+                ref={captcha}
+                sitekey="6Lfeqq8mAAAAANI2S78dn1zE22t2UdXZav_cB6jG"
+                onChange={onChange}
+                />                
+              </div> */}
+              <div className="recaptcha">
+                <ReCAPTCHA
+                
+                  sitekey="6Lfeqq8mAAAAANI2S78dn1zE22t2UdXZav_cB6jG"
+                  onChange={handleRecaptchaChange}
+                />
+              </div>
+
               <Button variant="primary" type="button" className="w-100 mt-2" onClick={()=>consulta()}
               >
               Consultar
@@ -125,7 +168,22 @@ if (token){
             </Form.Group>
           </Form>
 
-          {gVales.map((g)=><Grupo key={g.periodo} periodo={String(g.periodo)} items={g.items}/>)}
-    </div>)
 
+          {gVales.map((g) => (
+            <div key={g.periodo}>
+              <Grupo periodo={String(g.periodo)} items={g.items} />
+              
+             
+            </div>
+          ))}
+            
+            {mostrarBoton && (
+              <Button variant="success"  className="w-100 mt-2 d-flex align-items-center" onClick={() => window.location.href='mapa'}>
+              <FaMapMarkerAlt className="map-icon me-4 ms-3" size="8%" /> 
+              <span className="me-3">   Consulta los lugares autorizados </span> 
+              </Button>
+            )}  
+          
+    </div>
+    )
 }

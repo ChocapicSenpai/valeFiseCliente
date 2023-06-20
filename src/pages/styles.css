@@ -7,8 +7,28 @@
   background-color: #ecf4ff;
 }
 
+.fondo2{
+  background-color: #dbeaff;
+}
+
 .fullHeight {
     min-height: 90vh;
+}
+
+.btnhome{
+  height: 45vh;
+  width: 50vh;
+  margin-top: 2.5vh;
+}
+
+.homecontainer{
+  height: 100vh;
+  background-color: white;
+}
+
+.footer.f{
+  position: absolute;
+  bottom: 0;
 }
 
 
