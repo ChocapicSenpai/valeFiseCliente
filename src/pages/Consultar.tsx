@@ -102,6 +102,7 @@ export function Consultar(){
     }
     setGvales([])
     setEstado({loading: true})
+    setMostrarBoton(true);
 if (token){
   consultaAgente()
 } else {
