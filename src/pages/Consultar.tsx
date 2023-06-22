@@ -26,8 +26,14 @@ export function Consultar(){
   const [token] = useLocalStorage('token',"")
   const [agente] = useLocalStorage('agente',"")
   const [mostrarBoton, setMostrarBoton] = useState(false)
-  const [recaptchaToken, setRecaptchaToken] = useState('');
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
+  const handleRecaptchaChange = (token: string | null) => {
+    console.log('Token reCAPTCHA:', token);
+    setRecaptchaToken(token);
+    // Resto del código
+  };
+//
 
   function setValor(valor:string){
     if (isNumber(valor))
@@ -82,23 +88,7 @@ export function Consultar(){
     });
 
   }
-  //
-  // const captcha = useRef<ReCAPTCHA>(null);
 
-  // const onChange=()=>{
-  //   if (captcha.current) {
-  //     console.log(captcha.current.getValue());
-  //   }
-  // }
-  const handleRecaptchaChange = (token: string | null) => {
-    if (token) {
-      setRecaptchaToken(token);
-      console.log(token)
-      
-    } 
-  };
-
-//
 
   function consulta(){
     if (!dni || dni === ""){
@@ -143,25 +133,15 @@ setMostrarBoton(true); // Activar la visibilidad del botón
 
         <div className="text-danger">{estado.error}</div>
         
-        <br/>
-
-            
-              {/* <div className="recaptcha">
-                <ReCAPTCHA
-                ref={captcha}
+        
+              <div className="recaptcha d-flex justify-content-center align-items-center mt-3">
+                <ReCAPTCHA                
                 sitekey="6Lfeqq8mAAAAANI2S78dn1zE22t2UdXZav_cB6jG"
-                onChange={onChange}
-                />                
-              </div> */}
-              <div className="recaptcha">
-                <ReCAPTCHA
-                
-                  sitekey="6Lfeqq8mAAAAANI2S78dn1zE22t2UdXZav_cB6jG"
-                  onChange={handleRecaptchaChange}
+                onChange={handleRecaptchaChange}
                 />
               </div>
 
-              <Button variant="primary" type="button" className="w-100 mt-2" onClick={()=>consulta()}
+              <Button variant="primary" type="button" className="w-100 mt-4 " size="lg" onClick={()=>consulta()}
               >
               Consultar
             </Button>

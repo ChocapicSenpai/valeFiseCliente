@@ -16,14 +16,35 @@
 }
 
 .btnhome{
-  height: 45vh;
-  width: 50vh;
-  margin-top: 2.5vh;
+  height: 20vh;
+  width: 38vh;
+
 }
 
 .homecontainer{
-  height: 100vh;
-  background-color: white;
+  height: 92vh;
+
+}
+
+
+
+.headhome{
+  font-family: 'Coolvetica', sans-serif !important;
+  background-image:  url(../assets/bcf.png);  
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-bottom: solid;
+  
+  
+}
+
+
+
+
+
+.bodyhome{
+  background-color: "";
 }
 
 .footer.f{
@@ -31,4 +52,12 @@
   bottom: 0;
 }
 
+.link-style {
+  color: #212529;
+  text-decoration: none;
+ 
+}
+.link-style:hover {
+  color: black; /* Cambia el color a rojo cuando se pasa el mouse sobre el enlace */
+}
 

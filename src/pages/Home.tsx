@@ -9,18 +9,46 @@ import { CiLock } from "react-icons/ci";
 
 function Home() {
   return (
-    <div className="homecontainer d-flex justify-content-center">
-    <div className="d-grid gap-2 justify-content-center ">
-      <Button variant="success" className="btnhome" size="lg"  onClick={() => window.location.href='valesfise/consultar'}>
-      <CiUser className="map-icon me-4 ms-3" size="40%" /> <br/> <br/> 
-        <h1 className="display-5">BENEFICIARIO</h1>
-      </Button>      
-      <Button variant="primary"  className="btnhome" size="lg" onClick={() => window.location.href='valesfise/login'}>
-      <CiLock className="map-icon me-4 ms-3" size="40%" /> <br/> <br/>    
-        <h1 className="display-5">AGENTE</h1>
-      </Button>
-    </div>
-    </div>
+   
+    <div className="homecontainer ">
+
+      <div className="container text-center">
+      <br></br>
+
+        <div className=" row align-items-center justify-align-center headhome " style={{height:"20vh"}}>    
+      
+          
+            <h1>¿Como deseas iniciar?</h1>     
+          
+        </div>
+        
+        <br></br><br></br><br></br>
+        
+        <div className="container">
+          <div className="d-grip gap-2  align-items-center justify-align-center bodyhome">
+
+          <Button variant="success" className="btnhome" size="lg"  onClick={() => window.location.href='valesfise/consultar'}>
+          <CiUser className="map-icon me-4 ms-3" size=" 40%" /> 
+            <h2 className="">BENEFICIARIO</h2>
+          </Button> 
+          <br></br><br></br><br></br>
+
+          <Button variant="primary"  className="btnhome" size="lg" onClick={() => window.location.href='valesfise/login'}>
+          <CiLock className="map-icon me-4 ms-3" size="40%" />
+            <h2 className="" >AGENTE</h2>
+          </Button>
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>  
+    
+ 
+
+   
+   
   );
 }
 

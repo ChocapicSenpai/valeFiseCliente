@@ -24,8 +24,9 @@ function App() {
           </div>
         </header>
 
-        <div className="d-flex justify-content-center">
-          <div className="col-sm-12 col-md-4 border fondo1" style={{ minHeight: "89vh" }}>
+        <div className="row  d-flex justify-content-center">
+
+          <div className="col-sm-12 col-md-4 border fondo1" style={{ minHeight: "86.5vh"  }}>
             <Routes>           
               <Route path="/valesfise" element={<Home />} />
               <Route path="/valesfise/consultar" element={<Consultar />} />
@@ -38,10 +39,11 @@ function App() {
           </div>                     
         </div>
 
-        <div className="d-flex justify-content-center">
+        <div className="row justify-content-center">
           <div className="col-sm-12 col-md-4 border fondo2" >
-        <Footer/>
-        </div>                     
+          <Footer />  
+              
+          </div>                     
         </div>
         
       </div>  
