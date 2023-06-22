@@ -54,7 +54,7 @@ export function Validar() {
         setToken(token);
         setAgente(agente);
         setEstado({loading: false})
-        navigate(`/valesfise`)
+        navigate(`/valesfise/consultar`)
       }
 
     })

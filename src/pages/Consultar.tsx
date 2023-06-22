@@ -73,6 +73,7 @@ export function Consultar(){
         const g = groupArrayByPeriod(response.data.vales)
         setGvales(g)
         setEstado({loading: false})
+        setMostrarBoton(true); 
 
       }
 
@@ -106,7 +107,7 @@ if (token){
 } else {
   consultaLibre()
 }
-setMostrarBoton(true); // Activar la visibilidad del botón
+// setMostrarBoton(true); // Activar la visibilidad del botón
 }
 
   if (estado.loading)
@@ -155,6 +156,8 @@ setMostrarBoton(true); // Activar la visibilidad del botón
               
              
             </div>
+
+            
           ))}
             
             {mostrarBoton && (
